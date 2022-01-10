@@ -1,0 +1,2054 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EasyAntiCheat.Client</name>
+    </assembly>
+    <members>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.Cerberus`1.#ctor(System.IntPtr,EasyAntiCheat.Client.P2P.Runtime{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Client.P2P.Cerberus.Cerberus`1"/> class.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.Cerberus`1.BeginFrame">
+            <summary>
+            Notifies the Cerberus interface that the game server or the game client is starting a new frame.
+            
+            Each call to BeginFrame must be matched with a corresponding call to EndFrame.
+            It is not allowed to call BeginFrame twice without calling EndFrame first.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.Cerberus`1.EndFrame">
+            <summary>
+            Notifies the Cerberus interface that the game server or game client has finished a frame.
+            
+            It is not allowed to call EndFrame if BeginFrame has not been called first.
+            It is not allowed to log any events outside the BeginFrame/EndFrame block.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.Cerberus`1.LogGameRoundStart(System.String,System.String,System.Int32)">
+            <summary>
+            Logs a new game round start.
+            
+            <param name="MapName">Name of the loaded game map.</param>
+            <param name="ModeName">Name of the game mode being played.</param>
+            <param name="RoundTimeSeconds">The length of the game round to be played, in seconds. If there is no time limit to the round, use 0.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.Cerberus`1.LogGameRoundEnd(System.Int32)">
+            <summary>
+            Logs a game round end.
+            
+            <param name="WinningTeamID">The winning team id. Use 0 if not applicable.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.Cerberus`1.LogPlayerSpawn(`0,System.Int32,System.Int32)">
+            <summary>
+            Logs a player spawning in the map.
+            
+            <param name="Player">The local Client object identifier of the player.</param>
+            <param name="TeamID">Identifier of the player's team. Use 0 if the game doesn't have the concept of player teams.</param>
+            <param name="CharacterID">The player's character id. Use 0 if there's no separate characters or otherwise not applicable.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.Cerberus`1.LogPlayerDespawn(`0)">
+            <summary>
+            Logs a player despawning, either because of dying to environmental damage or for example when switching to spectator mode.
+            
+            <param name="Player">The local Client object identifier of the player.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.Cerberus`1.LogPlayerKill(`0,`0)">
+            <summary>
+            Logs a player getting killed by another player.
+            
+            <param name="PlayerVictim">The victim player who was killed.</param>
+            <param name="PlayerAttacker">The attacker player who killed the victim.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.Cerberus`1.LogPlayerDowned(`0,`0)">
+            <summary>
+            Logs a player getting knocked down on the ground in a way that they cannot recover from it by themselves.
+            When this happens, the player should not be able to move or move in very limited way and require another
+            player's help to be revived or brought back up.
+            
+            For example when player requires a medic to heal them to get back into the game from ground.
+            
+            This event must not be called for temporary stuns or knockdowns that allow the player to self-recover.
+            
+            <param name="PlayerVictim">The local Client object identifier of the knocked down player.</param>
+            <param name="PlayerAttacker">The local Client object identifier of the attacking player.
+            Use null if the player was knocked down by environment/NPC/non-player trigger.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.Cerberus`1.LogPlayerRevive(`0,`0)">
+            <summary>
+            Logs a player being revived,
+            either by another player or by the environment,
+            for example after getting knocked down for certain amount of time.
+            
+            <param name="PlayerRevived">The local Client object identifier of the revived player.</param>
+            <param name="PlayerReviving">The local Client object identifier of the player reviving the other player.
+            Use null if the player was revived by environment/NPC/non-player trigger.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.Cerberus`1.LogPlayerTick(`0,EasyAntiCheat.Client.P2P.Cerberus.PlayerTick)">
+            <summary>
+            Logs whenever a player moves, looks around or their state is otherwise changed in the map.
+            
+            This routine should be called only when a player's state changes,
+            not on every game tick if their state remains the same.
+            
+            <param name="Player">The local Client object identifier of the player.</param>
+            <param name="EventParams">The event parameters structure.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.Cerberus`1.LogPlayerUseWeapon(`0,EasyAntiCheat.Client.P2P.Cerberus.PlayerUseWeapon)">
+            <summary>
+            Logs whenever a player uses a weapon or an item.
+            
+            <param name="Player">The local Client object identifier of the player.</param>
+            <param name="EventParams">The event parameters structure.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.Cerberus`1.LogPlayerTakeDamage(`0,`0,EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamage)">
+            <summary>
+            Logs whenever a player takes damage, either inflicted by another player or by the environment.
+            
+            <param name="PlayerVictim">The local Client object identifier of the victim player.</param>
+            <param name="PlayerAttacker">The local Client object identifier of the attacking player.</param>
+            <param name="EventParams">The event parameters structure.</param>
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.P2P.Cerberus.ICerberus`1">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.P2P.Cerberus.ICerberus`1"/> interface provides methods for tracking players.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.ICerberus`1.BeginFrame">
+            <summary>
+            Notifies the Cerberus interface that the game server or the game client is starting a new frame.
+            
+            Each call to BeginFrame must be matched with a corresponding call to EndFrame.
+            It is not allowed to call BeginFrame twice without calling EndFrame first.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.ICerberus`1.EndFrame">
+            <summary>
+            Notifies the Cerberus interface that the game server or game client has finished a frame.
+            
+            It is not allowed to call EndFrame if BeginFrame has not been called first.
+            It is not allowed to log any events outside the BeginFrame/EndFrame block.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.ICerberus`1.LogGameRoundStart(System.String,System.String,System.Int32)">
+            <summary>
+            Logs a new game round start.
+            
+            <param name="MapName">Name of the loaded game map.</param>
+            <param name="ModeName">Name of the game mode being played.</param>
+            <param name="RoundTimeSeconds">The length of the game round to be played, in seconds. If there is no time limit to the round, use 0.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.ICerberus`1.LogGameRoundEnd(System.Int32)">
+            <summary>
+            Logs a game round end.
+            
+            <param name="WinningTeamID">The winning team id. Use 0 if not applicable.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.ICerberus`1.LogPlayerSpawn(`0,System.Int32,System.Int32)">
+            <summary>
+            Logs a player spawning in the map.
+            
+            <param name="Player">The local Client object identifier of the player.</param>
+            <param name="TeamID">Identifier of the player's team. Use 0 if the game doesn't have the concept of player teams.</param>
+            <param name="CharacterID">The player's character id. Use 0 if there's no separate characters or otherwise not applicable.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.ICerberus`1.LogPlayerDespawn(`0)">
+            <summary>
+            Logs a player despawning, either because of dying to environmental damage or for example when switching to spectator mode.
+            
+            <param name="Player">The local Client object identifier of the player.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.ICerberus`1.LogPlayerKill(`0,`0)">
+            <summary>
+            Logs a player getting killed by another player.
+            
+            <param name="ClientVictim">The victim player who was killed.</param>
+            <param name="ClientKiller">The attacker player who killed the victim.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.ICerberus`1.LogPlayerDowned(`0,`0)">
+            <summary>
+            Logs a player getting knocked down on the ground in a way that they cannot recover from it by themselves.
+            When this happens, the player should not be able to move or move in very limited way and require another
+            player's help to be revived or brought back up.
+            
+            For example when player requires a medic to heal them to get back into the game from ground.
+            
+            This event must not be called for temporary stuns or knockdowns that allow the player to self-recover.
+            
+            <param name="PlayerVictim">The local Client object identifier of the knocked down player.</param>
+            <param name="PlayerAttacker">The local Client object identifier of the attacking player.
+            Use null if the player was knocked down by environment/NPC/non-player trigger.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.ICerberus`1.LogPlayerRevive(`0,`0)">
+            <summary>
+            Logs a player being revived after they had been downed,
+            either by another player or by the environment.
+            
+            <param name="PlayerRevived">The local Client object identifier of the revived player.</param>
+            <param name="PlayerReviving">The local Client object identifier of the player reviving the other player.
+            Use null if the player was revived by environment/NPC/non-player trigger.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.ICerberus`1.LogPlayerTick(`0,EasyAntiCheat.Client.P2P.Cerberus.PlayerTick)">
+            <summary>
+            Logs whenever a player moves, looks around or their state is otherwise changed in the map.
+            
+            This routine should be called only when a player's state changes,
+            not on every game tick if their state remains the same.
+            
+            <param name="Player">The local Client object identifier of the player.</param>
+            <param name="EventParams">The event parameters structure.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.ICerberus`1.LogPlayerUseWeapon(`0,EasyAntiCheat.Client.P2P.Cerberus.PlayerUseWeapon)">
+            <summary>
+            Logs whenever a player uses a weapon or an item.
+            
+            <param name="Player">The local Client object identifier of the player.</param>
+            <param name="EventParams">The event parameters structure.</param>
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.ICerberus`1.LogPlayerTakeDamage(`0,`0,EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamage)">
+            <summary>
+            Logs whenever a player takes damage, either inflicted by another player or by the environment.
+            
+            <param name="PlayerVictim">The local Client object identifier of the victim player.</param>
+            <param name="PlayerAttacker">The local Client object identifier of the attacking player.</param>
+            <param name="EventParams">The event parameters structure.</param>
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamage">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamage"/> logs whenever a player takes damage, either inflicted by another player or by the environment.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamage.VictimPosition">
+            <summary>
+            The victim player's current world position.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamage.VictimViewRotation">
+            <summary>
+            The direction in which the victim player is looking at.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamage.AttackerPosition">
+            <summary>
+            The attacking player's current world position.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamage.AttackerViewRotation">
+            <summary>
+            The direction in which the attacking player is looking at.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamage.AttackerFieldOfView">
+            <summary>
+            The field of view of the attacker. For example when using a sniper weapon scope, the field of view changes.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamage.WeaponID">
+            <summary>
+            Identifier of the weapon or an item used.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamage.HitBoneID">
+            <summary>
+            Identifier of the bone in the victim's player model which was hit.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamage.DamageTaken">
+            <summary>
+            The number of health points that the victim lost by the hit.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamage.DamageFlags">
+            <summary>
+            Combination of the PlayerTakeDamageFlags enumeration values.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamageFlags">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamageFlags"/> describes the damaging hit a player has taken.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamageFlags.PlayerTakeDamageNormalHit">
+            <summary>
+            Normal hit damage taken.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTakeDamageFlags.PlayerTakeDamageCriticalHit">
+            <summary>
+            Critical hit damage taken, for example a headshot.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.P2P.Cerberus.PlayerTick">
+             <summary>
+             The <see cref="T:EasyAntiCheat.Client.P2P.Cerberus.PlayerTick"/> logs whenever a player moves, looks around or their state is otherwise changed in the map.
+            
+             This routine should be called only when a player's state changes, not on every game tick if their state remains the same.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTick.Position">
+            <summary>
+            The player's current world position.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTick.ViewRotation">
+            <summary>
+            The direction in which the player is looking at.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTick.Health">
+            <summary>
+            The player's current health.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTick.TickFlags">
+            <summary>
+            Combination of the PlayerTickFlags enumeration values. Describes the current state of the player.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.P2P.Cerberus.PlayerTickFlags">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.P2P.Cerberus.PlayerTickFlags"/> describes the player's current state for the PlayerTick event.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTickFlags.PlayerTickNone">
+            <summary>
+            Normal player state.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTickFlags.PlayerTickCrouched">
+            <summary>
+            The player is crouched.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTickFlags.PlayerTickProned">
+            <summary>
+            The player is proned.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTickFlags.PlayerTickMounted">
+            <summary>
+            The player is mounted in a vehicle, a plan or riding a horse.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTickFlags.PlayerTickDowned">
+            <summary>
+            The player is in an incapacitated state, having been knocked down on the ground.
+            
+            This flag is set only when the player is knocked down in a way that requires them
+            to receive a healing or reviving from another player to get back up.
+            
+            This flag must not be used for temporary states that allow the player to self-recover,
+            for example when being temporarily stunned for only a few seconds.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTickFlags.PlayerTickSwimming">
+            <summary>
+            The player is swimming.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTickFlags.PlayerTickAirborne">
+            <summary>
+            The player is in air, not touching ground or a ladder.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTickFlags.PlayerTickClimbingLadder">
+            <summary>
+            The player is climbing a ladder.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerTickFlags.PlayerTickStunned">
+            <summary>
+            The player is temporarily stunned and unable to move.
+            
+            This flag is used for temporary stuns or knockdowns that allow the player to self-recover.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.P2P.Cerberus.PlayerUseWeapon">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.P2P.Cerberus.PlayerUseWeapon"/> logs whenever a player uses a weapon or an item.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerUseWeapon.Position">
+            <summary>
+            The player's current world position.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerUseWeapon.ViewRotation">
+            <summary>
+            The direction in which the player is looking at.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerUseWeapon.FieldOfView">
+            <summary>
+            The field of view of the player. For example when using a sniper weapon scope, the field of view changes.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerUseWeapon.WeaponID">
+            <summary>
+            Identifier of the weapon or an item used.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.PlayerUseWeapon.IsMeleeAttack">
+            <summary>
+            If the player is using a melee attack, set to true.
+            Otherwise if the weapon used is for a ranged attack, set to false.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.P2P.Cerberus.Quaternion">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.P2P.Cerberus.Quaternion"/> represents where a player is looking at and object rotations.
+            
+            Cerberus uses the same left-handed coordinate system as Unreal Engine 4.
+            If the game uses a right-handed coordinate system, the W-component must be multiplied by -1.
+            As such, a player's view rotation must be logged by the following system:
+            
+            W-component	The scalar component of the quaternion.
+            X-component	Forward direction.
+            Y-component	Right direction.
+            Z-component	Up direction.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.Quaternion.W">
+            <summary>
+            The scalar component of the quaternion.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.Quaternion.X">
+            <summary>
+            Forward direction.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.Quaternion.Y">
+            <summary>
+            Right direction.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.Quaternion.Z">
+            <summary>
+            Up direction.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.Quaternion.#ctor(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Client.P2P.Cerberus.Quaternion"/> struct.
+            </summary>
+            <param name="W">The scalar component of the quaternion.</param>
+            <param name="X">Forward direction.</param>
+            <param name="Y">Right direction.</param>
+            <param name="Z">Up direction.</param>
+        </member>
+        <member name="T:EasyAntiCheat.Client.P2P.Cerberus.Vector3">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.P2P.Cerberus.Vector3"/> struct represents a player's or an object's world position.
+            
+            Cerberus uses the same left-handed coordinate system as Unreal Engine 4.
+            As such, a player's world position must be logged by the following system:
+            
+            X-component	Forward direction.
+            Y-component	Right direction.
+            Z-component	Up direction.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.Vector3.X">
+            <summary>
+            Forward direction.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.Vector3.Y">
+            <summary>
+            Right direction.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.Cerberus.Vector3.Z">
+            <summary>
+            Up direction.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Cerberus.Vector3.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Client.P2P.Cerberus.Vector3"/> struct.
+            </summary>
+            <param name="X">Forward direction.</param>
+            <param name="Y">Right direction.</param>
+            <param name="Z">Up direction.</param>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.NativeCerberus.DllFileName">
+            <summary>
+            Library name for Unity builds, any CPU. Windows/Linux/OSX.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.P2P.NativeClient">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.P2P.NativeClient"/> class interfaces the native EasyAntiCheat module.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.NativeClient.nogcOnProgress">
+            <summary>
+            Static reference to the delegate passed to <see cref="M:EasyAntiCheat.Client.P2P.NativeClient.Initialize(EasyAntiCheat.Client.P2P.NativeClient.CallbackProgress,EasyAntiCheat.Client.P2P.NativeClient.CallbackFinished,EasyAntiCheat.Client.P2P.NativeClient.LocalIntegrityCallback,EasyAntiCheat.Client.P2P.NativeClient.RemoteIntegrityCallback)"/>; Prevents garbage collection.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.NativeClient.nogcOnLocalGameClientIntegrityViolation">
+            <summary>
+            Static reference to prevent garbage collection for PollStatus.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.NativeClient.Initialize(EasyAntiCheat.Client.P2P.NativeClient.CallbackProgress,EasyAntiCheat.Client.P2P.NativeClient.CallbackFinished,EasyAntiCheat.Client.P2P.NativeClient.LocalIntegrityCallback,EasyAntiCheat.Client.P2P.NativeClient.RemoteIntegrityCallback)">
+            <summary>
+            Initializes the IGameClient instance.
+            </summary>
+            <param name="OnProgress">Callback.</param>
+            <param name="OnFinished">Callback.</param>
+            <param name="OnLocalGameClientIntegrityViolation">Callback.</param>
+            <param name="OnRemotePeerClientIntegrityProc">Callback.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.NativeClient.Dispose">
+            <summary>
+            Destroys the native IGameClient instance.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.NativeClient.ResetState">
+             <summary>
+             Resets the internal state of the EasyAntiCheat client-side.
+            
+             The game client must always call this routine before attempting
+             to enter a new peer-to-peer online session, i.e. before BeginSession
+             or RegisterPeer is called.
+             </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.NativeClient.RegisterPeer(System.IntPtr,System.String,System.String,System.String)">
+             <summary>
+             Registers another connected peer client.
+            
+             This routine can be called either prior BeginSession or during an active session.
+            
+             Call once for each game client that participates in the peer-to-peer session.
+             Each call to IGameClient::RegisterPeer must be matched with a corresponding
+             call to IGameClient::UnregisterPeer.
+             </summary>
+             <param name="ClientObject">Client identifier used by the game client, such as a pointer to the game's player object. Must be non-zero.</param>
+             <param name="PlayerGUID">Global unique identifier of the player.</param>
+             <param name="PlayerIP">IP address of the player's client. Formatted as IPv4 string "127.0.0.1".</param>
+             <param name="PlayerName">Player's name on the game server.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.NativeClient.UnregisterPeer(System.IntPtr)">
+             <summary>
+             Unregisters a peer client from the current peer-to-peer session.
+            
+             Call once when another peer client leaves or is disconnected from the active peer-to-peer session.
+             Each call to IGameClient::RegisterPeer must be matched with a corresponding call to IGameClient::UnregisterPeer.
+             </summary>
+             <param name="ClientObject">ClientObject that was registered with the IGameClient::RegisterPeer interface.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.NativeClient.BeginSession(System.Int32,System.String,System.String,System.Byte[],System.Int32)">
+             <summary>
+             Signals the EasyAntiCheat client-side that the local player has started
+             or joined a peer-to-peer multiplayer session.
+            
+             The routine provides the EAC client-side with a platform user authentication ticket.
+             The authentication ticket will be used by EAC back-end to validate the user identity.
+            
+             The caller is responsible for providing a valid, non-expired ticket.
+             </summary>
+             <param name="RegisterTimeout">Time in seconds to allow a registered peer to complete the anti-cheat authentication.</param>
+             <param name="LocalPlayerGUID">Global unique identifier of the local player.</param>
+             <param name="PlatformName">
+             The authentication platform name.
+             The name must be in lowercase format and cannot contain any special characters.
+             For example "gog", "steam", "uplay", "wegame" or other.
+             </param>
+             <param name="AuthTicket">Pointer to the ticket byte buffer.</param>
+             <param name="AuthTicketLength">Length of the ticket, in bytes.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.NativeClient.EndSession">
+             <summary>
+             Signals the EasyAntiCheat client-side the end of a multiplayer session.
+            
+             The routine automatically unregisters any currently still registered peers.
+             </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.NativeClient.PollForMessageToPeer(System.IntPtr@,System.Byte[]@,System.Int32@)">
+            <summary>
+            Polls the EasyAntiCheat client-side for any pending messages
+            that should be sent to another peer client.
+            </summary>
+            <param name="RecipientObject">Pass in the client for whom to pop the message. Returns the client to whom this message should be sent.</param>
+            <param name="MessageBuffer">A byte array containing the EAC message to be sent to the specified client.</param>
+            <param name="MessageLength">The length of the EAC message to be sent to the specified client.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.NativeClient.SetMaxAllowedMessageLength(System.Int32)">
+            <summary>
+            Sets up the maximum size of EAC network messages.
+            If it is not set then a standard value of 256 will be used. Must not be zero.
+            </summary>
+            <param name="MaxMessageLength">Maximum message length that PollForMessageToPeer is allowed to return for the caller.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.NativeClient.ReceiveMessageFromPeer(System.IntPtr,System.Byte[],System.UInt32)">
+            <summary>
+            Passes a network message received from another peer client's
+            EasyAntiCheat client-side to the local client.
+            </summary>
+            <param name="SenderObject">The client who sent this message.</param>
+            <param name="MessageBuffer">A byte array containing the EAC message received from the peer.</param>
+            <param name="MessageLength">The length of the EAC message received from the peer.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.NativeClient.PollStatus">
+             <summary>
+             Polls the EasyAntiCheat client-side for status of the anti-cheat.
+            
+             If the local game client would become untrusted
+             or another peer client would need to be disconnected,
+             the provided callback(s) are called accordingly.
+             </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.NativeClient.InitLocalization(System.String,System.String)">
+            <summary>
+            Sets up localization for all user facing messages EAC generates..
+            </summary>
+            <param name="Language">ISO-639 code for language (e.g. "fr").</param>
+            <param name="Country">ISO-3166 code for preferred region/country (e.g. "ca").</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.NativeClient.Cerberus">
+            <summary>
+            Gets the Cerberus interface.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.NativeClient.UpdatePlatformUserAuthTicket(System.String,System.Byte[],System.Int32)">
+             <summary>
+             Updates the active platform user authentication ticket for the current multiplayer session while
+             waiting for other players to join, in order to prevent expiration of the set authentication ticket.
+            
+             This API is intended to be used only by games that have a seamless peer-to-peer multiplayer
+             in which the local player may be the only player in an already started multiplayer session
+             and other players can join and leave seamlessly without ending and starting a new session.
+            
+             The intention of this API is to allow the game to update the platform user authentication ticket
+             for the local player while they are waiting for the first player to join an already started session.
+             Otherwise there is a risk that if the local player started the session already long time ago
+             before the first player joined the session, their user authentication ticket may have expired,
+             resulting in an anti-cheat kick from the multiplayer session by the other player(s).
+             </summary>
+             <param name="PlatformName">
+             The authentication platform name.
+             The name must be in lowercase format and cannot contain any special characters.
+             For example "gog", "steam", "uplay", "wegame" or other.
+             </param>
+             <param name="AuthTicket">Pointer to the ticket byte buffer.</param>
+             <param name="AuthTicketLength">Length of the ticket, in bytes.</param>
+        </member>
+        <member name="F:EasyAntiCheat.Client.P2P.NativeClient.UnityModule.DllFileName">
+            <summary>
+            Library name for Unity builds, any CPU. Windows/Linux/OSX.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.P2P.Runtime`1">
+             <summary>
+             The <see cref="T:EasyAntiCheat.Client.P2P.Runtime`1"/> class represents the anti-cheat runtime.
+             </summary>
+            
+        </member>
+        <member name="P:EasyAntiCheat.Client.P2P.Runtime`1.Initialized">
+            <summary>
+            Gets a value indicating whether the EasyAntiCheat client-side interface has been initialized.
+            </summary>
+            <returns>False if the initialize function hasn't been called.</returns>
+        </member>
+        <member name="P:EasyAntiCheat.Client.P2P.Runtime`1.Integrity">
+            <summary>
+            Gets the status of the peer's game client runtime integrity.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.P2P.Runtime`1.Cerberus">
+            <summary>
+            Gets the Cerberus player tracker instance.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.IsActive">
+            <summary>
+            Checks whether the game has been started with EasyAntiCheat.
+            </summary>
+            <returns>False if the game has been started outside the anti-cheat.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.Dispose">
+            <summary>
+            Releases resources.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.Initialize(System.EventHandler{EasyAntiCheat.Client.StateChangedEventArgs},System.EventHandler{EasyAntiCheat.Client.LoadCompletedEventArgs},System.EventHandler{EasyAntiCheat.Client.PeerClientIntegrityProcArgs{`0}},System.EventHandler{EasyAntiCheat.Client.LoadProgressEventArgs})">
+            <summary>
+            Initializes the EasyAntiCheat client-side interface.
+            </summary>
+            <param name="onStateChanged">The method to call on game client integrity violation in Runtime.PollStatus().</param>
+            <param name="onCompleted">The method to call on completion.</param>
+            <param name="onPeerClientIntegrityProc">The method to call for peer's integrity changes.</param>
+            <param name="onProgress">The method to call on progress.</param>
+            /// <returns>True upon successful initialization.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.ResetState">
+             <summary>
+             Resets the internal state of the EasyAntiCheat client-side.
+            
+             The game client must always call this routine before attempting
+             to enter a new peer-to-peer online session, i.e. before BeginSession
+             or RegisterPeer is called.
+             </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.RegisterPeer(`0,System.String)">
+             <summary>
+             Registers another connected peer client.
+            
+             This routine can be called either prior BeginSession or during an active session.
+            
+             Call once for each game client that participates in the peer-to-peer session.
+             Each call to Runtime.RegisterPeer must be matched with a corresponding
+             call to Runtime.UnregisterPeer.
+             </summary>
+             <param name="Client">Any object that uniquely identifies the user.</param>
+             <param name="PlayerGUID">Global unique identifier of the player.</param>
+             <returns>True if the peer was successfully registered.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.RegisterPeer(`0,System.String,System.String)">
+             <summary>
+             Registers another connected peer client.
+            
+             This routine can be called either prior BeginSession or during an active session.
+            
+             Call once for each game client that participates in the peer-to-peer session.
+             Each call to Runtime.RegisterPeer must be matched with a corresponding
+             call to Runtime.UnregisterPeer.
+             </summary>
+             <param name="Client">Any object that uniquely identifies the user.</param>
+             <param name="PlayerGUID">Global unique identifier of the player.</param>
+             <param name="PlayerIP">IP address of the player's client. Formatted as IPv4 string "127.0.0.1".</param>
+             <returns>True if the peer was successfully registered.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.RegisterPeer(`0,System.String,System.String,System.String)">
+             <summary>
+             Registers another connected peer client.
+            
+             This routine can be called either prior BeginSession or during an active session.
+            
+             Call once for each game client that participates in the peer-to-peer session.
+             Each call to Runtime.RegisterPeer must be matched with a corresponding
+             call to Runtime.UnregisterPeer.
+             </summary>
+             <param name="Client">Any object that uniquely identifies the user.</param>
+             <param name="PlayerGUID">Global unique identifier of the player.</param>
+             <param name="PlayerIP">IP address of the player's client. Formatted as IPv4 string "127.0.0.1".</param>
+             <param name="PlayerName">Player's name on the game server.</param>
+             <returns>True if the peer was successfully registered.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.UnregisterPeer(`0)">
+             <summary>
+             Unregisters a peer client from the current peer-to-peer session.
+            
+             Call once when another peer client leaves or is disconnected from the active peer-to-peer session.
+             Each call to Runtime.RegisterPeer must be matched with a corresponding call to Runtime.UnregisterPeer.
+             </summary>
+             <param name="Client">Client that was registered with the Runtime.RegisterPeer interface.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.BeginSession(System.Int32,System.String,System.String)">
+             <summary>
+             Signals the EasyAntiCheat client-side that the local player has started
+             or joined a peer-to-peer multiplayer session.
+            
+             The routine provides the EAC client-side with a platform user authentication ticket.
+             The authentication ticket will be used by EAC back-end to validate the user identity.
+            
+             The caller is responsible for providing a valid, non-expired ticket.
+            
+             Note:
+             This API should only be called for Steam games as the AuthTicket has to be generated
+             by the caller for the rest of the Platforms.
+             </summary>
+             <param name="RegisterTimeout">Time in seconds to allow a registered peer to complete the anti-cheat authentication.</param>
+             <param name="LocalPlayerGUID">Global unique identifier of the local player.</param>
+             <param name="PlatformName">
+             The authentication platform name.
+             The name must be in lowercase format and cannot contain any special characters.
+             For example "gog", "steam", "uplay", "wegame" or other.
+             </param>
+             <returns>True if the session was created successfully.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.BeginSession(System.Int32,System.String,System.String,System.Byte[])">
+             <summary>
+             Signals the EasyAntiCheat client-side that the local player has started
+             or joined a peer-to-peer multiplayer session.
+            
+             The routine provides the EAC client-side with a platform user authentication ticket.
+             The authentication ticket will be used by EAC back-end to validate the user identity.
+            
+             The caller is responsible for providing a valid, non-expired ticket.
+            
+             Steam games:
+             EasyAntiCheat will automatically generate the authentication ticket internally
+             and the function should be called with an empty ticket as following:
+             BeginSession( RegisterTimeout, LocalPlayerGUID, "steam", null );
+             </summary>
+             <param name="RegisterTimeout">Time in seconds to allow a registered peer to complete the anti-cheat authentication.</param>
+             <param name="LocalPlayerGUID">Global unique identifier of the local player.</param>
+             <param name="PlatformName">
+             The authentication platform name.
+             The name must be in lowercase format and cannot contain any special characters.
+             For example "gog", "steam", "uplay", "wegame" or other.
+             </param>
+             <param name="AuthTicket">Pointer to the ticket byte buffer.</param>
+             <returns>True if the session was created successfully.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.EndSession">
+             <summary>
+             Signals the EasyAntiCheat client-side the end of a multiplayer session.
+            
+             The routine automatically unregisters any currently still registered peers.
+             </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.PollForMessageToPeer(`0@,System.Byte[]@,System.Int32@)">
+            <summary>
+            Polls the EasyAntiCheat client-side for any pending messages
+            that should be sent to another peer's game client.
+            </summary>
+            <param name="RecipientClient">Returns the client to whom this message should be sent.</param>
+            <param name="MessageBuffer">A byte array containing the EAC message to be sent to the specified client.</param>
+            <param name="MessageLength">The length of the EAC message to be sent to the specified client.</param>
+            <returns>True if messages were found for any peer.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.PollForMessageToPeer(`0,System.Byte[]@,System.Int32@)">
+            <summary>
+            Polls the EasyAntiCheat client-side for pending messages for the specified recipient object.
+            </summary>
+            <param name="RecipientClient">The recipient peer.</param>
+            <param name="MessageBuffer">A byte array containing the EAC message to be sent to the specified client.</param>
+            <param name="MessageLength">The length of the EAC message to be sent to the specified client.</param>
+            <returns>True if messages were found for the specified recipient peer.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.SetMaxAllowedMessageLength(System.Int32)">
+            <summary>
+            Sets up the maximum size of EAC network messages.
+            If it is not set then a standard value of 256 will be used. Must not be zero.
+            </summary>
+            <param name="MaxMessageLength">Maximum message length that PollForMessageToPeer is allowed to return for the caller.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.ReceiveMessageFromPeer(`0,System.Byte[],System.Int32)">
+            <summary>
+            Passes a network message received from another peer client's
+            EasyAntiCheat client-side to the local client.
+            </summary>
+            <param name="SenderClient">The client who sent this message.</param>
+            <param name="MessageBuffer">A byte array containing the EAC message received from the peer.</param>
+            <param name="MessageLength">The length of the EAC message received from the peer.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.PollStatus">
+             <summary>
+             Polls the EasyAntiCheat client-side for status of the anti-cheat.
+            
+             If the local game client would become untrusted
+             or another peer client would need to be disconnected,
+             the provided callback(s) are called accordingly.
+             </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.InitLocalization(System.String,System.String)">
+            <summary>
+            Sets up localization for all user facing messages EAC generates..
+            </summary>
+            <param name="Language">ISO-639 code for language (e.g. "fr").</param>
+            <param name="Country">ISO-3166 code for preferred region/country (e.g. "ca").</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.P2P.Runtime`1.UpdatePlatformUserAuthTicket(System.String,System.Byte[])">
+             <summary>
+             Updates the active platform user authentication ticket for the current multiplayer session while
+             waiting for other players to join, in order to prevent expiration of the set authentication ticket.
+            
+             This API is intended to be used only by games that have a seamless peer-to-peer multiplayer
+             in which the local player may be the only player in an already started multiplayer session
+             and other players can join and leave seamlessly without ending and starting a new session.
+            
+             The intention of this API is to allow the game to update the platform user authentication ticket
+             for the local player while they are waiting for the first player to join an already started session.
+             Otherwise there is a risk that if the local player started the session already long time ago
+             before the first player joined the session, their user authentication ticket may have expired,
+             resulting in an anti-cheat kick from the multiplayer session by the other player(s).
+             </summary>
+             <param name="PlatformName">
+             The authentication platform name.
+             The name must be in lowercase format and cannot contain any special characters.
+             For example "gog", "steam", "uplay", "wegame" or other.
+             </param>
+             <param name="AuthTicket">Pointer to the ticket byte buffer.</param>
+        </member>
+        <member name="T:EasyAntiCheat.Client.ClientAuth.ClientAuth">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.ClientAuth.ClientAuth"/> class loads the EasyAntiCheat basic client auth interface.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.ClientAuth.ClientAuth.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Client.ClientAuth.ClientAuth"/> class.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.ClientAuth.ClientAuth.Dispose">
+            <summary>
+            Disposes the ClientAuth instance.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.ClientAuth.ClientAuth.WriteChallengeResponse(System.Byte[],System.Byte[])">
+            <summary>
+            Writes a response to the challenge that the game client receives from the server.
+            </summary>
+            <param name="ServerChallenge">Challenge created by the server.</param>
+            <param name="ClientResponse">Byte array to receive the client's response to the challenge. Must be at least 128 bytes.</param>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientAuth.NativeClientAuth.DllFileName">
+            <summary>
+            Library name for Unity builds, any CPU. Windows/Linux/OSX.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.ClientIntegrityViolationType">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.ClientIntegrityViolationType"/> enum represents the possible categories of client integrity violations.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientIntegrityViolationType.IntegrityViolationNone">
+            <summary>
+            Invalid type, never used.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientIntegrityViolationType.EACHashCatalogueFileNotFound">
+             <summary>
+             An EAC Hash Catalogue file could not be found under EasyAntiCheat/Certificates/.
+            
+             Example where {} is the violation cause string:
+            
+             ViolationCause:		'EasyAntiCheat/Certificates/game.bin'.
+             DefaultMessage:		'EAC Hash file not found: {}'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientIntegrityViolationType.EACHashCatalogueError">
+             <summary>
+             An EAC Hash Catalogue file is erroneus.
+            
+             Example where {} is the violation cause string:
+            
+             ViolationCause:		'EasyAntiCheat/Certificates/game.bin'.
+             DefaultMessage:		'EAC Hash error: {}'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientIntegrityViolationType.EACHashCatalogueCertificateRevoked">
+             <summary>
+             The EAC Hash Catalogue certificate has been revoked.
+            
+             Example where {} is the violation cause string:
+            
+             ViolationCause:		'game.cer'.
+             DefaultMessage:		'EAC Hash Certificate revoked: {}'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientIntegrityViolationType.UnknownGameFileVersion">
+             <summary>
+             A game file modification was detected,
+             due to failing the EAC Hash check for the file on disk.
+            
+             Example where {} is the violation cause string:
+            
+             ViolationCause:		'engine.dll'.
+             DefaultMessage:		'Unknown file version: {}'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientIntegrityViolationType.RequiredGameFileNotFound">
+             <summary>
+             A game file that is listed in the EAC Hash Catalogue
+             and is required to be present, was not found on disk.
+            
+             Example where {} is the violation cause string:
+            
+             ViolationCause:		'Assets/textures.bin'.
+             DefaultMessage:		'Missing required file: {}'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientIntegrityViolationType.UncataloguedGameFileForbidden">
+             <summary>
+             An unknown file was attempted to be loaded from the game directory.
+            
+             Example where {} is the violation cause string:
+            
+             ViolationCause:		'version.dll'.
+             DefaultMessage:		'Unknown game file: {}'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientIntegrityViolationType.UnknownSystemFileVersion">
+             <summary>
+             A known system file failed an integrity validation check and cannot be allowed.
+            
+             Example where {} is the violation cause string:
+            
+             ViolationCause:		'dinput.dll'.
+             DefaultMessage:		'Unknown system file: {}'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientIntegrityViolationType.ForbiddenModuleLoaded">
+             <summary>
+             An unwanted malicious module was detected to have been loaded.
+            
+             Example where {} is the violation cause string:
+            
+             ViolationCause:		'speedhack.dll'.
+             DefaultMessage:		'Forbidden module loaded: {}'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientIntegrityViolationType.CorruptedMemory">
+             <summary>
+             One of the game core modules failed a runtime memory check,
+             triggered by an unknown code modification in their code sections.
+            
+             Example where {} is the violation cause string:
+            
+             ViolationCause:		'engine.dll'.
+             DefaultMessage:		'Corrupted memory: {}'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientIntegrityViolationType.HackToolDetected">
+             <summary>
+             A hack tool was detected to be running in the system.
+            
+             Example where {} is the violation cause string:
+            
+             ViolationCause:		'Cheat Engine'.
+             DefaultMessage:		'Hack tool detected: {}'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientIntegrityViolationType.InternalAntiCheatViolation">
+             <summary>
+             A hack attempt to the anti-cheat core was detected.
+            
+             Example where {} is the violation cause string:
+            
+             ViolationCause:		'#C0000005'.
+             DefaultMessage:		'Anti-Cheat Error: {}'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientIntegrityViolationType.CorruptedNetworkMessageFlow">
+             <summary>
+             Packet corruption of EAC network messages
+             between the game client and the game server was detected.
+            
+             This error usually triggers only during the EAC SDK integration,
+             when new code is being implemented and debugged.
+            
+             Example where {} is the violation cause string:
+            
+             ViolationCause:		'BadMessageOrder'.
+             DefaultMessage:		'Corrupted packet flow: {}'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientIntegrityViolationType.CannotRunUnderVirtualMachine">
+             <summary>
+             If the game developer has requested it,
+             EAC will prevent running the game client under virtual machines.
+            
+             Example where {} is the violation cause string:
+            
+             ViolationCause:		''.
+             DefaultMessage:		'Cannot run under Virtual Machine.'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ClientIntegrityViolationType.ForbiddenSystemConfiguration">
+             <summary>
+             A forbidden operating system configuration was detected.
+            
+             This violation is triggered if EAC detects that e.g.:
+             - Windows Patch Guard has been disabled,
+             - a forbidden kernel-mode code modification was found,
+             - other similar operating system level hack attempt.
+            
+             Example where {} is the violation cause string:
+            
+             ViolationCause:		'Patch Guard not running'.
+             DefaultMessage:		'Forbidden system configuration: {}'.
+             </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.ConnectionDescriptor">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.ConnectionDescriptor"/> struct describes a connection to the anti-cheat network.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.ConnectionDescriptor.Connected">
+            <summary>
+            Gets a value indicating whether there is a connection to the anti-cheat network.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.ConnectionDescriptor.Status">
+            <summary>
+            Gets the connection status.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.ConnectionDescriptor.StatusMessage">
+            <summary>
+            Gets additional information about the <see cref="P:EasyAntiCheat.Client.ConnectionDescriptor.Status"/>. Can be null.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.ConnectionStatus">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.ConnectionStatus"/> enum represents the status of the network connection.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ConnectionStatus.Disconnected">
+            <summary>
+            No connection established.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ConnectionStatus.DomainResolveError">
+            <summary>
+            A DNS error occured, preventing the connection from being established.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ConnectionStatus.NetworkError">
+            <summary>
+            A general network error occured, preventing the connection from being established.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.ConnectionStatus.Connected">
+            <summary>
+            A connection is established.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.GameLauncher">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.GameLauncher"/> class loads the EasyAntiCheat service.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.GameLauncher.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Client.GameLauncher"/> class.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.GameLauncher.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Client.GameLauncher"/> class.
+            </summary>
+            <param name="filename">The main executable of the game to start.</param>
+            <param name="arguments">The arguments to pass to the game process.</param>
+            <param name="workingDirectory">Optional full path to the working directory for the game process.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.GameLauncher.#ctor(EasyAntiCheat.Client.LoadInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Client.GameLauncher"/> class.
+            </summary>
+            <param name="loadInfo">The <see cref="P:EasyAntiCheat.Client.GameLauncher.Options"/> that will be used by <see cref="M:EasyAntiCheat.Client.GameLauncher.BeginLoad"/>.</param>
+        </member>
+        <member name="E:EasyAntiCheat.Client.GameLauncher.Completed">
+            <summary>
+            Occurs when the loader has completed.
+            </summary>
+        </member>
+        <member name="E:EasyAntiCheat.Client.GameLauncher.Progress">
+            <summary>
+            Occurs when the loader has made progress.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.GameLauncher.Options">
+            <summary>
+            Gets the properties to respect when launching the game.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.GameLauncher.BeginLoad">
+            <summary>
+            Loads the EasyAntiCheat client-side asynchronously. <Use cref="P:EasyAntiCheat.Client.GameLauncher.Options"/> to configure behavior.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.GameLauncher.CancelLoad">
+            <summary>
+            Cancels asynchronous load of the EasyAntiCheat client-side.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.GameLauncher.Dispose">
+            <summary>
+            Terminates any ongoing loading and releases all resources.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.GameLauncher.Load">
+            <summary>
+            Loads the EasyAntiCheat client-side synchronously in the current thread. <Use cref="P:EasyAntiCheat.Client.GameLauncher.Options"/> to configure behavior.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.GameLauncher.OnLoadProgress(System.UInt32,System.IntPtr)">
+            <summary>
+            Called to update the load progress.
+            </summary>
+            <param name="Progress">Progress value 0-100.</param>
+            <param name="CallbackParameter">Callback parameter.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.GameLauncher.OnLoadFinished(EasyAntiCheat.Client.LoadResult,System.String,System.IntPtr)">
+            <summary>
+            Called when the loading has finished.
+            </summary>
+            <param name="Result">Result code.</param>
+            <param name="Message">Message description.</param>
+            <param name="CallbackParameter">Callback parameter.</param>
+        </member>
+        <member name="T:EasyAntiCheat.Client.HostValidationResult">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.HostValidationResult"/> enum represents the possible categories of EAC host validation callback results.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.HostValidationResult.ServerHostValidationSuccess">
+            The server host's EAC client-side status has been validated and can be trusted.
+        </member>
+        <member name="F:EasyAntiCheat.Client.HostValidationResult.ServerHostValidationFailed">
+            The server host is not running the EAC client-side themselves and thus cannot be trusted.
+        </member>
+        <member name="F:EasyAntiCheat.Client.HostValidationResult.ServerHostValidationTimedOut">
+            The server host failed to respond to our validation request within the given time window.
+        </member>
+        <member name="T:EasyAntiCheat.Client.IntegrityDescriptor">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.IntegrityDescriptor"/> struct describes the runtime integrity.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.IntegrityDescriptor.#ctor(System.Boolean,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Client.IntegrityDescriptor"/> struct.
+            </summary>
+            <param name="violated">A value indicating whether the integrity has been violated.</param>
+            <param name="message">Additional information message.</param>
+        </member>
+        <member name="P:EasyAntiCheat.Client.IntegrityDescriptor.Violated">
+            <summary>
+            Gets a value indicating whether the integrity has been violated.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.IntegrityDescriptor.ViolationMessage">
+            <summary>
+            Gets additional information when the integrity is <see cref="P:EasyAntiCheat.Client.IntegrityDescriptor.Violated"/>. Can be null.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.LoadResult">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.LoadResult"/> enum represents the possible categories of EAC callback results.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.LoadResult.InitSuccess">
+            <summary>
+            EAC initialization success.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.LoadResult.LauncherInvalidParameter">
+            <summary>
+            Launcher function was called with invalid parameters.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.LoadResult.LauncherDNSError">
+             <summary>
+            
+             DNS resolve to the EasyAntiCheat CDN failed.
+            
+             This message is meant for logging/troubleshooting purposes only
+             and should be ignored in the Game Launcher's main logic.
+            
+             If the EAC CDN would be unreachable, the game client is started
+             with a dummy anti-cheat implementation to allow continuous game play.
+            
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.LoadResult.LauncherNetworkError">
+             <summary>
+            
+             All connections attempts to the EasyAntiCheat CDN failed.
+            
+             This message is meant for logging/troubleshooting purposes only
+             and should be ignored in the Game Launcher's main logic.
+            
+             If the EAC CDN would be unreachable, the game client is started
+             with a dummy anti-cheat implementation to allow continuous game play.
+            
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.LoadResult.LauncherFailure">
+            <summary>
+            The game could not be launched or initialized (missing executable, invalid params, other..).
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.LoadResult.LauncherInstallError">
+            <summary>
+            EAC has not been installed and an attempt to install it failed.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.LoadResult.LauncherSuccessUnderWine">
+            <summary>
+            EasyAntiCheat has been loaded into the current process, running under Wine on Linux/OSX.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.LoadResult.InitCancelRequested">
+            <summary>
+            The InitProgress callback cancelled the initialization procedure.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.LoadResult.GameClientConnected">
+            <summary>
+            [Legacy.Runtime] EAC client has established connection to the EAC backend.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.LoadResult.GameClientDisconnected">
+            <summary>
+            [Legacy.Runtime] EAC client has lost connection to the EAC backend and will attempt reconnecting.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.LoadResult.GameClientAuthenticated">
+            <summary>
+            [Legacy.Runtime] The game server and EAC backend have authenticated the client GUID.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.LoadResult.GameClientIntegrityViolation">
+            <summary>
+            [Legacy.Runtime] Game client integrity has been compromised and the game session cannot be trusted.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.NativeLauncher.StartGame(System.Boolean,System.String,System.String,System.String,EasyAntiCheat.Client.NativeLauncher.LauncherProgress,EasyAntiCheat.Client.NativeLauncher.LauncherFinished)">
+            <summary>
+            Initializes EasyAntiCheat client-side and starts the game.
+            </summary>
+            <param name="InstallService">Allow installing EAC service if it has not been installed.</param>
+            <param name="ExecutablePath"></param>
+            <param name="LaunchParameters"></param>
+            <param name="WorkingDirectory"></param>
+            <param name="OnProgress"></param>
+            <param name="OnFinished"></param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.NativeLauncher.GetGameProcess">
+            <summary>
+            Provides Process object describing the started game client process.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.Hydra.NetProtect.INetProtect">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.Hydra.NetProtect.INetProtect"/> interface provides methods for encrypting the game's own network traffic.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.NetProtect.INetProtect.ProtectMessage(System.IO.MemoryStream,System.IO.MemoryStream)">
+            <summary>
+            Encrypts an arbitrary message that will be sent to the game server.
+            Input and Output can be the same to encrypt in place.
+            
+            In this overload, all of Input from [0,Input.Length] will be used. The output will be written to
+            Output starting at position 0 and its Length will be updated appropriately.
+            
+            </summary>
+            <param name="Input">
+            A MemoryStream containing the data to encrypt.
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <param name="Output">
+            A MemoryStream where the output will be written.
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <returns>True on success, otherwise false.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.NetProtect.INetProtect.ProtectMessage(System.IO.MemoryStream,System.Int64,System.IO.MemoryStream,System.Int64)">
+            <summary>
+            Encrypts an arbitrary message that will be sent to the game server.
+            Input and Output can be the same to encrypt in place.
+            
+            In this overload, Input from [InputOffset,Input.Length] will be used. The output will be written to
+            Output starting at OutputOffset and its Length will be updated appropriately.
+            
+            NOTE: If Input and Output refer to the same object, then InputOffset and OutputOffset must be the same!
+            	  The underlying crypto APIs process one byte at a time and do not make a copy of the input data.
+            
+            </summary>
+            <param name="Input">
+            A MemoryStream containing the data to encrypt.
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <param name="InputOffset">The position in Input to begin reading from.</param>
+            <param name="Output">
+            A MemoryStream where the output will be written.
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <param name="OutputOffset">The position in Output to begin writing to.</param>
+            <returns>True on success, otherwise false.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.NetProtect.INetProtect.UnprotectMessage(System.IO.MemoryStream,System.IO.MemoryStream)">
+            <summary>
+            Decrypts an encrypted message received from a game client.
+            Input and Output can be the same to decrypt in place.
+            </summary>
+            <param name="Input">
+            A MemoryStream containing the data to encrypt.
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <param name="Output">
+            A MemoryStream where the output will be written.
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <returns>True on success, otherwise false.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.NetProtect.INetProtect.UnprotectMessage(System.IO.MemoryStream,System.Int64,System.IO.MemoryStream,System.Int64)">
+            <summary>
+            Decrypts an arbitrary message that will be sent to the game client and deciphered on the other side.
+            Input and Output can be the same to encrypt in place.
+            
+            In this overload, Input from [InputOffset,Input.Length] will be used. The output will be written to
+            Output starting at OutputOffset and its Length will be updated appropriately.
+            
+            NOTE: If Input and Output refer to the same object, then InputOffset and OutputOffset must be the same!
+            	  The underlying crypto APIs process one byte at a time and do not make a copy of the input data.
+            
+            </summary>
+            <param name="Input">
+            A MemoryStream containing the data to decrypt.
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <param name="InputOffset">The position in Input to begin reading from.</param>
+            <param name="Output">
+            A MemoryStream where the output will be written.
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <param name="OutputOffset">The position in Output to begin writing to.</param>
+            <returns>True on success, otherwise false.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.NetProtect.NetProtect.#ctor(System.IntPtr)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Client.Hydra.NetProtect.NetProtect"/> class.
+            </summary>
+            <param name="Instance">A pointer to the appropriate NetProtect instance.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.NetProtect.NetProtect.ProtectMessage(System.IO.MemoryStream,System.IO.MemoryStream)">
+            <summary>
+            Encrypts an arbitrary message that will be sent to the game client and deciphered on the other side.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.NetProtect.NetProtect.ProtectMessage(System.IO.MemoryStream,System.Int64,System.IO.MemoryStream,System.Int64)">
+            <summary>
+            Encrypts an arbitrary message that will be sent to the game client and deciphered on the other side.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.NetProtect.NetProtect.UnprotectMessage(System.IO.MemoryStream,System.IO.MemoryStream)">
+            <summary>
+            Decrypts an arbitrary message that was previously enciphered by a game client.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.NetProtect.NetProtect.UnprotectMessage(System.IO.MemoryStream,System.Int64,System.IO.MemoryStream,System.Int64)">
+            <summary>
+            Decrypts an arbitrary message that was previously encrypted by a game client.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.Hydra.NativeNetProtect.DllFileName">
+            <summary>
+            Library name for Unity builds, any CPU. Windows/Linux/OSX.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.Hydra.NativeClient">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.Hydra.NativeClient"/> class interfaces the native EasyAntiCheat module.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.Hydra.NativeClient.nogcOnProgress">
+            <summary>
+            Static reference to the delegate passed to <see cref="M:EasyAntiCheat.Client.Hydra.NativeClient.Initialize(EasyAntiCheat.Client.Hydra.NativeClient.CallbackProgress,EasyAntiCheat.Client.Hydra.NativeClient.CallbackFinished,EasyAntiCheat.Client.Hydra.NativeClient.CallbackIntegrity,EasyAntiCheat.Client.Hydra.NativeClient.CallbackHostValidation)"/>; Prevents garbage collection.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.Hydra.NativeClient.nogcOnIntegrityViolation">
+            <summary>
+            Static reference to prevent garbage collection for PollStatus.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.NativeClient.Dispose">
+            <summary>
+            Destroys the native IGameClient instance.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.NativeClient.Initialize(EasyAntiCheat.Client.Hydra.NativeClient.CallbackProgress,EasyAntiCheat.Client.Hydra.NativeClient.CallbackFinished,EasyAntiCheat.Client.Hydra.NativeClient.CallbackIntegrity,EasyAntiCheat.Client.Hydra.NativeClient.CallbackHostValidation)">
+            <summary>
+            Initializes the IGameClient instance.
+            </summary>
+            <param name="OnProgress">Callback.</param>
+            <param name="OnFinished">Callback.</param>
+            <param name="OnIntegrityViolation">Callback.</param>
+            <param name="OnHostValidation">Callback.</param>
+        </member>
+        <member name="F:EasyAntiCheat.Client.Hydra.NativeClient.UnityModule.DllFileName">
+            <summary>
+            Library name for Unity builds, any CPU. Windows/Linux/OSX.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.Hydra.Runtime">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.Hydra.Runtime"/> class represents the anti-cheat runtime.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.Hydra.Runtime.Initialized">
+            <summary>
+            Gets a value indicating whether the EasyAntiCheat client-side interface has been initialized.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.Hydra.Runtime.Integrity">
+            <summary>
+            Gets the status of the game client runtime integrity.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.Hydra.Runtime.HostValidation">
+            <summary>
+            Gets the result of verifying that a listen server host is running the EAC client.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.Runtime.Initialize(System.EventHandler{EasyAntiCheat.Client.StateChangedEventArgs},System.EventHandler{EasyAntiCheat.Client.LoadCompletedEventArgs},System.EventHandler{EasyAntiCheat.Client.LoadProgressEventArgs})">
+            <summary>
+            Initializes the EasyAntiCheat client-side interface.
+            </summary>
+            <param name="onStateChanged">The method to call on game client integrity violation in Runtime.PollStatus().</param>
+            <param name="onCompleted">The method to call on completion.</param>
+            <param name="onProgress">The method to call on progress.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.Runtime.IsActive">
+            <summary>
+            Checks whether the game has been started with EasyAntiCheat.
+            </summary>
+            <returns>False if the game has been started outside the anti-cheat.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.Runtime.Release">
+            <summary>
+            Releases resources.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.Runtime.ConnectionReset">
+            <summary>
+            Resets the EasyAntiCheat client-side's internal connection state.
+            This routine must be called whenever the game client is about to connect to a new game server,
+            and when the game client disconnects from the game server.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.Runtime.PopNetworkMessage(System.Byte[]@,System.Int32@)">
+            <summary>
+            Polls the EasyAntiCheat client-side for any messages that should be sent to the EAC game server plugin.
+            </summary>
+            <param name="MessageBuffer">A byte array containing the EAC message to be sent to the server.</param>
+            <param name="MessageLength">The length of the EAC message to be sent to the server.</param>
+            <returns>False if there are no messages to send.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.Runtime.SetMaxAllowedMessageLength(System.Int32)">
+            <summary>
+            Sets up the maximum size of EAC network messages.
+            If it is not set then a standard value of 256 will be used. Must not be zero.
+            </summary>
+            <param name="MaxMessageLength">Maximum message length that PopNetworkMessage is allowed to return for the caller.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.Runtime.PushNetworkMessage(System.Byte[],System.Int32)">
+            <summary>
+            Pushes a network message received from the EAC game server plugin for this game client.
+            </summary>
+            <param name="MessageBuffer">A byte array containing the EAC message received from the server.</param>
+            <param name="MessageLength">The length of the EAC message received from the server.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.Runtime.PollStatus">
+            <summary>
+            Polls the EasyAntiCheat client-side for the game client integrity status.
+            The callback routine provided in Runtime.Initialize() will be called if the game client has become untrusted.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Hydra.Runtime.ValidateServerHost(System.UInt32)">
+            <summary>
+            Makes an asynchronous internal query to the game server, hosted by another game client,
+            to validate that they are running their game client instance under EAC protection.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.Hydra.Runtime.NetProtect">
+            <summary>
+            Gets the NetProtect game message protection instance.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.PeerClientIntegrityProcArgs`1">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.PeerClientIntegrityProcArgs`1"/> provides event data for game client's integrity procedure.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.PeerClientIntegrityProcArgs`1.ClientObject">
+            <summary>
+            Provides access to the client object of the peer.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.PeerClientIntegrityProcArgs`1.Status">
+            <summary>
+            Provides access to the <see cref="T:EasyAntiCheat.Client.PeerIntegrityStatus"/> that the peer had.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.PeerClientIntegrityProcArgs`1.StatusCause">
+            <summary>
+            Provides access to the status cause message.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.PeerClientIntegrityProcArgs`1.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> representation of the current instance.
+            </summary>
+            <returns>A <see cref="T:System.String"/> representation.</returns>
+        </member>
+        <member name="T:EasyAntiCheat.Client.Legacy.NativeClient">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.Legacy.NativeClient"/> class interfaces the native EasyAntiCheat module.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.Legacy.NativeClient.nogcOnProgress">
+            <summary>
+            Static reference to the delegate passed to <see cref="M:EasyAntiCheat.Client.Legacy.NativeClient.Initialize(EasyAntiCheat.Client.Legacy.NativeClient.CallbackProgress,EasyAntiCheat.Client.Legacy.NativeClient.CallbackFinished)"/>; Prevents garbage collection.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Legacy.NativeClient.Dispose">
+            <summary>
+            Destroys the native IGameClient instance.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Legacy.NativeClient.Initialize(EasyAntiCheat.Client.Legacy.NativeClient.CallbackProgress,EasyAntiCheat.Client.Legacy.NativeClient.CallbackFinished)">
+            <summary>
+            Initializes the IGameClient instance.
+            </summary>
+            <param name="OnProgress">Callback.</param>
+            <param name="OnFinished">Callback.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Legacy.NativeClient.SetUserToken(System.Byte[],System.Int32)">
+            <summary>
+            Sets the user token.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.Legacy.NativeClient.UnityModule.DllFileName">
+            <summary>
+            Library name for Unity builds, any CPU. Windows/Linux/OSX.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.Legacy.Runtime">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.Legacy.Runtime"/> class represents the anti-cheat runtime.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.Legacy.Runtime.Connection">
+            <summary>
+            Gets the status of the EAC network connection.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.Legacy.Runtime.Initialized">
+            <summary>
+            Gets a value indicating whether the module has been inititalized.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.Legacy.Runtime.Integrity">
+            <summary>
+            Gets the status of the runtime integrity.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.Legacy.Runtime.UserToken">
+            <summary>
+            Gets or sets the user token.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Legacy.Runtime.Initialize(System.EventHandler{EasyAntiCheat.Client.LoadCompletedEventArgs},System.EventHandler{EasyAntiCheat.Client.LoadProgressEventArgs},System.EventHandler{EasyAntiCheat.Client.StateChangedEventArgs})">
+            <summary>
+            Initializes the anti-cheat client.
+            </summary>
+            <param name="onCompleted">The method to call on completion.</param>
+            <param name="onProgress">The method to call on progress.</param>
+            <param name="onStateChanged">The method to call when, once initialized, the client state changes.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Legacy.Runtime.IsActive">
+            <summary>
+            Checks whether the game has been started with EasyAntiCheat.
+            </summary>
+            <returns>False if the game has been started outside the anti-cheat.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Legacy.Runtime.Release">
+            <summary>
+            Releases resources.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Legacy.Runtime.UpdateUserToken">
+            <summary>
+            Authenticates the user and connects to the anti-cheat network.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.PeerIntegrityStatus">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.PeerIntegrityStatus"/> enum represents the possible peer integrity violations.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.PeerIntegrityStatus.PeerValidationCompleted">
+             <summary>
+             An informational message that is given for each game client
+             when they have completed the anti-cheat validation.
+            
+             The provided callback message should not be
+             presented to the end-user as it is redundant,
+             but can be logged for troubleshooting purposes.
+            
+             Example where {} is the status update cause string:
+            
+             StatusCause:			'ValidationOK'.
+             DefaultMessage:			'Anti-cheat peer validation completed: .. .'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.PeerIntegrityStatus.PeerAntiCheatValidationFailed">
+             <summary>
+             Another game client peer failed the anti-cheat authentication,
+             and should be disconnected from the peer-to-peer session.
+            
+             Example where {} is the status update cause string:
+            
+             StatusCause:			'NoResponseFromPeer'.
+             DefaultMessage:			'Anti-cheat peer validation failed: .. .'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.PeerIntegrityStatus.PeerAntiCheatHeartbeatRejected">
+             <summary>
+             Another game client peer was rejected by the anti-cheat back-end,
+             and should be disconnected from the peer-to-peer session.
+            
+             Example where {} is the status update cause string:
+            
+             StatusCause:			'HearbeatRejected'.
+             DefaultMessage:			'Anti-cheat peer rejected: .. .'.
+             </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.PeerIntegrityStatus.PeerAntiCheatClientBanned">
+             <summary>
+             Another game client peer is banned by the anti-cheat service,
+             and should be disconnected from the peer-to-peer session.
+            
+             Example where {} is the status update cause string:
+            
+             StatusCause:			'Banned'.
+             DefaultMessage:			'Anti-cheat peer banned: .. .'.
+             </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.StateChangedEventArgs">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.StateChangedEventArgs"/> class provides event data for a change in the client state.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.StateChangedEventArgs.Message">
+            <summary>
+            Gets the change message.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.StateChangedEventArgs.Type">
+            <summary>
+            Gets the change type.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.StateChangedEventArgs.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> representation.
+            </summary>
+            <returns>A <see cref="T:System.String"/> representation.</returns>
+        </member>
+        <member name="T:EasyAntiCheat.Client.Debug">
+            <summary>
+            Logging class.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.Debug.WriterDelegate">
+            <summary>
+            A method writing the given <paramref name="message"/> to the log.
+            </summary>
+            <param name="message">The message to write.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Debug.SetOut(EasyAntiCheat.Client.Debug.WriterDelegate)">
+            <summary>
+            Sets the output stream for log messages.
+            </summary>
+            <param name="writer">A delegate to the method to write messages with; can be null.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Debug.SetOut(System.IO.TextWriter)">
+            <summary>
+            Sets the output stream for log messages.
+            </summary>
+            <param name="writer">The instance to output the log messages with; can be null.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Debug.WriteLine(System.Object)">
+            <summary>
+            Writes a line to the log.
+            </summary>
+            <param name="value">The message to write.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Client.Debug.WriteLine(System.String,System.Object[])">
+            <summary>
+            Writes a line to the log.
+            </summary>
+            <param name="format">The format of the message to write.</param>
+            <param name="args">The arguments to format to the message to write.</param>
+        </member>
+        <member name="T:EasyAntiCheat.Client.InstallerInfo">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.InstallerInfo"/> class provides information for the EasyAntiCheat installer.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.InstallerInfo.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Client.InstallerInfo"/> class with the default configuration properties set.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.InstallerInfo.Allow">
+            <summary>
+            Gets or sets a value indicating whether EasyAntiCheat should be installed if the service isn't available yet.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.InstallerInfo.Filename">
+            <summary>
+             Gets or sets the path to the installer.
+            </summary>
+            <remarks>The path can be either absolute or relative to the working directory.</remarks>
+        </member>
+        <member name="P:EasyAntiCheat.Client.InstallerInfo.Visible">
+            <summary>
+            Gets or sets whether the installer should have a GUI or just install silently.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.InstallerInfo.FullPath">
+            <summary>
+            Gets the full path to the installer executable.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.LoadCompletedEventArgs">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.LoadCompletedEventArgs"/> provides event data for a completed loading procedure.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.LoadCompletedEventArgs.Status">
+            <summary>
+            Gets the <see cref="T:EasyAntiCheat.Client.LoadResult"/> the loading has completed with.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.LoadCompletedEventArgs.GetGameProcess">
+            <summary>
+            Provides Process object describing the started game client process.
+            This routine can be called only if the Status equals LoadResult.InitSuccess.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.LoadCompletedEventArgs.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> representation of the current instance.
+            </summary>
+            <returns>A <see cref="T:System.String"/> representation.</returns>
+        </member>
+        <member name="T:EasyAntiCheat.Client.LoadEventArgs">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.LoadEventArgs"/> provides event data for a loading procedure.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.LoadEventArgs.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Client.LoadEventArgs"/> class.
+            </summary>
+            <param name="message">The event message.</param>
+        </member>
+        <member name="P:EasyAntiCheat.Client.LoadEventArgs.Message">
+            <summary>
+            The event message.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.LoadEventArgs.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> representation of the current instance.
+            </summary>
+            <returns>A <see cref="T:System.String"/> representation.</returns>
+        </member>
+        <member name="T:EasyAntiCheat.Client.LoadInfo">
+            <summary>
+            Specifies a set of values that are used when you launch a game with EasyAntiCheat.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.LoadInfo.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Client.LoadInfo"/> class.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Client.LoadInfo.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Client.LoadInfo"/> class.
+            </summary>
+            <param name="filename">The game main executable; null if loading ingame.</param>
+            <param name="arguments">The arguments to pass to the game process.</param>
+            <param name="workingDirectory">Optional full path to the working directory for the game process.</param>
+        </member>
+        <member name="P:EasyAntiCheat.Client.LoadInfo.Arguments">
+            <summary>
+            Gets or sets the set of command-line arguments to pass to the game process.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.LoadInfo.Filename">
+            <summary>
+            Gets or sets the executable for the game to start.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.LoadInfo.WorkingDirectory">
+            <summary>
+            Gets or sets the working directory for the game process to start with.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.LoadInfo.Installer">
+            <summary>
+            Gets the installation configuration instance.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.LoadProgressEventArgs">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.LoadProgressEventArgs"/> provides event data for an ongoing loading procedure.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.LoadProgressEventArgs.Progress">
+            <summary>
+            The progress, a value between 0 and 100.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.StateChangeType">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Client.StateChangeType"/> enum represents the possible categories of state changes.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.StateChangeType.Connection">
+            <summary>
+            Used whenever a game client's connection state changed, for example on
+            a disconnect it changes from connected to disconnected.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.StateChangeType.Integrity">
+            <summary>
+            Used to specify integrity changes, for example integrity violations.
+            If the game client's integrity changes it usually results in a termination
+            of the session for that particular client.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Client.StateChangeType.HostValidation">
+            <summary>
+            Used the specify that the host server has been validated, i.e. is running
+            an instance of EAC.
+            Used in client-server architecture only.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Client.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Client.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.LogLevel">
+            <summary>
+            Log verbosity level.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.LogLevel.NoLogging">
+            <summary>
+            Logging disabled.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.LogLevel.Error">
+            <summary>
+            Code bugs.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.LogLevel.Warning">
+            <summary>
+            Connection status changes.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.LogLevel.Info">
+            <summary>
+            Informational messages about user status changes.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.LogLevel.Verbose">
+            <summary>
+            Verbose debugging information.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.LogLevel.VeryVerbose">
+            <summary>
+            Very verbose debugging information.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.LogWriterDelegate">
+            <summary>
+            LogWriterDelegate.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.LogMessageWriterDelegate">
+            <summary>
+            LogMessageWriterDelegate.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Log">
+            <summary>
+            The static <see cref="T:EasyAntiCheat.Log"/> class provides the logging functionality of the EasyAntiCheat server plugin.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Log.doWrite">
+            <summary>
+            The method to write log messages with.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Log.Level">
+            <summary>
+            Gets or sets the lowest level to log.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Log.Prefix">
+            <summary>
+            Gets or sets the prefix of each log message.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Log.TimestampFormat">
+            <summary>
+            Gets or sets the format string for the timestamp. Can be null or empty to disable the timestamp.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Log.SetOut(System.IO.TextWriter)">
+            <summary>
+            Sets the output stream for log messages.
+            </summary>
+            <param name="writer">The instance to output the log messages with; can be null.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Log.SetOut(EasyAntiCheat.LogMessageWriterDelegate)">
+            <summary>
+            Sets a writer delegate for log messages.
+            </summary>
+            <param name="doWrite">A delegate to the method to write messages with; can be null.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Log.SetOut(EasyAntiCheat.LogWriterDelegate)">
+            <summary>
+            Sets a writer delegate for log messages.
+            </summary>
+            <param name="doWrite">A delegate to the method to write messages with; can be null.</param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,1808 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EasyAntiCheat.Server</name>
+    </assembly>
+    <members>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.#ctor(System.IntPtr)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTracker"/> class.
+            </summary>
+            <param name="CerberusInstance">A pointer to the appropriate Cerberus instance.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.BeginRegisterEvent(System.Int32,System.String)">
+             <summary>
+             Starts the event registration process for the provided EventID.
+            
+             Overriding predefined events:
+             When called using a predefined event id, such as PlayerUseWeapon( 5 ),
+             the default parameters of that event get automatically registered and
+             any parameters registered after this call will be considered as
+             additional parameters.
+            
+             Registering a custom event:
+             When called with a new event id there's no further initialization, all
+             all of the parameters will be defined by the caller.
+             </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.EndRegisterEvent(System.Int32)">
+             <summary>
+             Ends the event registration process for the provided EventID.
+            
+             This function wraps up the event registration process for the provided
+             EventID, storing the provided parameter types and names.
+             </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.RegisterClientObjectParam(System.String)">
+             <summary>
+             Register a ClientObject parameter related to the event.
+            
+             The ClientObject instance is a game client that was registered with IGameServer::RegisterClient.
+             </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.RegisterStringParam(System.String)">
+            <summary>
+            Register a string parameter related to the event.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.RegisterBoolParam(System.String)">
+            <summary>
+            Register a boolean parameter related to the event.
+            The boolean value itself will be a 8-bit integer. The integer is considered to
+            be equal to false when it's 0 and true when it's 1.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.RegisterInt32Param(System.String)">
+            <summary>
+            Register a signed 32-bit integer parameter related to the event.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.RegisterInt32VectorParam(System.String)">
+            <summary>
+            Register a signed 32-bit integer vector parameter related to the event.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.RegisterFloatParam(System.String)">
+            <summary>
+            Register a signed float parameter related to the event.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.RegisterFloatVectorParam(System.String)">
+            <summary>
+            Register a vector as a parameter of the event that's currently being registered.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.BeginLogEvent(System.Int32)">
+            <summary>
+            Starts the event logging for the specified event.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.EndLogEvent(System.Int32)">
+             <summary>
+             Ends the event logging of the specified event.
+            
+             The event will be sent to the client's buffer if all of the event's parameters were
+             passed, i.e. the right amount of parameters of correct types. If an incorrect amount
+             of parameters has been passed the data will be disregarded.
+             </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.LogClientObjectParam(System.Int32,EasyAntiCheat.Server.Hydra.Client)">
+            <summary>
+            Logs the provided value for the specified event as the next parameter.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.LogStringParam(System.Int32,System.String)">
+            <summary>
+            Logs the provided value for the specified event as the next parameter.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.LogBoolParam(System.Int32,System.Int32)">
+            <summary>
+            Logs the provided value for the specified event as the next parameter.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.LogInt32Param(System.Int32,System.Int32)">
+            <summary>
+            Logs the provided value for the specified event as the next parameter.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.LogInt32VectorParam(System.Int32,System.Int32[])">
+            <summary>
+            Logs the provided value for the specified event as the next parameter.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.LogFloatParam(System.Int32,System.Single)">
+            <summary>
+            Logs the provided value for the specified event as the next parameter.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.CerberusV2.LogFloatVectorParam(System.Int32,System.Single[])">
+            <summary>
+            Logs the provided value for the specified event as the next parameter.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.Cerberus.GameEventID">
+            Special player states
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.GameEventID.InvalidEventID">
+            
+             Invalid event id.
+            
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.GameEventID.GameRoundStart">
+            
+             <param name="map_name">Name of the map being played.</param>
+            
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.GameEventID.GameRoundEnd">
+            
+             <param name="winner_client_object">Optional client object instance of the winning player.</param>
+            
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.GameEventID.PlayerTick">
+            
+             <param name="client_object">Client object instance of the player's game client.</param>
+             <param name="player_position">The player's current world position.</param>
+             <param name="player_viewangles">The direction in which the player is looking at.</param>
+             <param name="player_tickflags">Optional flag set from the PlayerTickFlags enumeration.</param>
+            
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.GameEventID.PlayerDespawn">
+            
+             <param name="client_object">Client object instance of the player's game client.</param>
+            
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.GameEventID.PlayerUseWeapon">
+            
+             <param name="client_object">Client object instance of the player's game client.</param>
+             <param name="player_position">The player's current world position.</param>
+             <param name="player_viewangles">The direction in which the player is looking at.</param>
+             <param name="weapon_id">Identifier of the weapon used.</param>
+            
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.GameEventID.PlayerTakeDamage">
+            
+             <param name="victim_client_object">Client object of the victim player taking damage.</param>
+             <param name="victim_position">The victim's current world position.</param>
+             <param name="victim_viewangles">The direction in which the victim is looking at.</param>
+             <param name="attacker_client_object">Client object of the player inflicting damage.
+             This parameter is not set for environmental/NPC/non-player damage.</param>
+             <param name="attacker_position">The attacker's current world position.
+             Can be an empty vector if there's no attacker.</param>
+             <param name="attacker_view_angles">The direction in which the attacker is looking at.
+             Can be an empty vector if there's no attacker.</param>
+             <param name="weapon_id">Identifier of the weapon used, unused if there is no weapon.</param>
+             <param name="hitbone_id">Identifier of the bone in the victim's model which was hit.</param>
+            
+            @param	[in]		victim_client_object		Client object of the victim player taking damage.
+            @param	[in]		victim_position				The victim's current world position.
+            @param	[in]		victim_viewangles			The direction in which the victim is looking at.
+            @param	[in_opt]	attacker_client_object		Client object of the player inflicting damage.
+            													This parameter is not set for environmental/NPC/non-player damage.
+            @param	[in_opt]	attacker_position			The attacker's current world position.
+            													Can be an empty vector if there's no attacker.
+            @param	[in_opt]	attacker_view_angles		The direction in which the attacker is looking at.
+            													Can be an empty vector if there's no attacker.
+            @param	[in_opt]	weapon_id					Identifier of the weapon used, unused if there is no weapon.
+            @param	[in_opt]	hitbone_id					Identifier of the bone in the victim's model which was hit.
+            
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.GameEventID.CustomGameEventIDBase">
+            
+             The base value for custom events.
+            
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.Cerberus.GameRoundStart">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Hydra.Cerberus.GameRoundStart"/> logs a new game round start.
+            If the game doesn't have rounds per se, this routine is called when a new map has been loaded.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.GameRoundStart.MapName">
+            <summary>
+            The name of the loaded game map.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.Cerberus.ICerberus">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Hydra.Cerberus.ICerberus"/> interface provides methods for tracking players.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberus.LogPlayerDespawn(EasyAntiCheat.Server.Hydra.Cerberus.PlayerDespawn)">
+            <summary>
+            Logs a player despawn, e.g. dying or switching to spectators.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberus.LogPlayerTakeDamage(EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamage)">
+            <summary>
+            Logs when a player takes damage.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberus.LogPlayerUseWeapon(EasyAntiCheat.Server.Hydra.Cerberus.PlayerUseWeapon)">
+            <summary>
+            Logs when a player uses a weapon.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberus.LogPlayerTick(EasyAntiCheat.Server.Hydra.Cerberus.PlayerTick)">
+            <summary>
+            Logs the state of a player.
+            Called whenever a player's position is refreshed by the game server. (Server Tick)
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberus.LogGameRoundStart(System.String)">
+            <summary>
+            Logs a new game round start.
+            If the game doesn't have rounds per se, this routine is called when a new map has been loaded.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2"/> interface provides methods for tracking players.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.BeginRegisterEvent(System.Int32,System.String)">
+             <summary>
+             Begins the registration process of a single event.
+            
+             This routine must be called always prior to registering the parameters of the event,
+             and each call must be matched by a call to EndRegisterEvent.
+             </summary>
+             <param name="EventID">
+             ID of the event to be registered. When overriding a predefined
+             event this should be equal to one of the existing IDs. If a
+             predefined EventID is provided the EventName will be ignored.
+             New custom event IDs must start at the CustomGameEventIDBase.
+             </param>
+             <param name="EventName">
+             Null-terminated name of the event. If EventID is one of the predefined
+             ones, this will be ignored and the predefined event name will be used.
+             </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.EndRegisterEvent(System.Int32)">
+             <summary>
+             End the event registration process for the provided EventID.
+            
+             The function wraps up the event registration process for the provided
+             EventID, storing the provided parameter types and names.
+             </summary>
+             <param name="EventID">
+             ID of the event which is being registered.
+             </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.RegisterClientObjectParam(System.String)">
+             <summary>
+             Registers a ClientObject parameter related to the event.
+            
+             The ClientObject instance is a game client that was registered with IGameServer::RegisterClient.
+             </summary>
+             <param name="ParamName">
+             Name of the ClientObject, for events that take only a single
+             ClientObject this could simply be named "client_object".
+             For events that take multiple ClientObjects as parameters,
+             the names should clearly describe the objects. E.g.
+             "attacker_client_object" and "victim_client_object".
+             </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.RegisterStringParam(System.String)">
+            <summary>
+            Registers a string parameter related to the event.
+            </summary>
+            <param name="ParamName">
+            Null-terminated name of the string parameter.
+            </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.RegisterBoolParam(System.String)">
+            <summary>
+            Registers a boolean parameter related to the event.
+            The boolean value itself will be an 8-bit integer. The integer is considered to
+            be equal to true when it's non-zero and false when zero.
+            </summary>
+            <param name="ParamName">
+            Null-terminated name of the boolean parameter.
+            </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.RegisterInt32Param(System.String)">
+            <summary>
+            Registers a signed 32-bit integer parameter related to the event.
+            </summary>
+            <param name="ParamName">
+            Null-terminated name of the integer parameter.
+            </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.RegisterInt32VectorParam(System.String)">
+            <summary>
+            Registers a signed 32-bit integer vector parameter related to the event.
+            </summary>
+            <param name="ParamName">
+            Null-terminated name of the integer vector parameter.
+            </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.RegisterFloatParam(System.String)">
+            <summary>
+            Registers a float parameter related to the event.
+            </summary>
+            <param name="ParamName">
+            Null-terminated name of the float parameter.
+            </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.RegisterFloatVectorParam(System.String)">
+            <summary>
+            Registers a float vector parameter related to the event.
+            </summary>
+            <param name="ParamName">
+            Null-terminated name of the float vector parameter.
+            </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.BeginLogEvent(System.Int32)">
+             <summary>
+             Begins logging of a single event.
+            
+             This routine must be called always prior passing the parameters of the event,
+             and each call must be matched by a call to EndLogEvent.
+             For each individual event, there must be BeginLogEvent/EndLogEvent sequence.
+             However, if EndLogEvent is not getting called in between BeginLogEvent calls
+             the data logged for that event will be ignored.
+             </summary>
+             <param name="EventID">
+             ID of the event to be logged. This must be either one of the
+             predefined event IDs or the event must have been registered using
+             this id prior to calling this function.
+             </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.EndLogEvent(System.Int32)">
+            <summary>
+            Ends logging of a single event.
+            </summary>
+            <param name="EventID">
+            ID of the event for which logging is to be ended.
+            </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.LogClientObjectParam(System.Int32,EasyAntiCheat.Server.Hydra.Client)">
+            <summary>
+            Logs the provided value for the specified event as the next parameter.
+            </summary>
+            <param name="EventID">
+            ID of the related event, this event ID must match with
+            either one of the predefined or one of the custom ids.
+            </param>
+            <param name="Param">
+            The ClientObject to be logged as a part of the event.
+            </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.LogStringParam(System.Int32,System.String)">
+            <summary>
+            Logs the provided value for the specified event as the next parameter.
+            </summary>
+            <param name="EventID">
+            ID of the related event. This event ID must match with
+            either one of the predefined or one of the custom IDs.
+            </param>
+            <param name="Param">
+            The value to be logged.
+            </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.LogBoolParam(System.Int32,System.Int32)">
+            <summary>
+            Logs the provided value for the specified event as the next parameter.
+            </summary>
+            <param name="EventID">
+            ID of the related event. This event ID must match with
+            either one of the predefined or one of the custom IDs.
+            </param>
+            <param name="Param">
+            The value to be logged. True when non-zero, false otherwise.
+            </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.LogInt32Param(System.Int32,System.Int32)">
+            <summary>
+            Logs the provided value for the specified event as the next parameter.
+            </summary>
+            <param name="EventID">
+            ID of the related event. This event ID must match with
+            either one of the predefined or one of the custom IDs.
+            </param>
+            <param name="Param">
+            The value to be logged.
+            </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.LogInt32VectorParam(System.Int32,System.Int32[])">
+            <summary>
+            Logs the provided value for the specified event as the next parameter.
+            </summary>
+            <param name="EventID">
+            ID of the related event. This event ID must match with
+            either one of the predefined or one of the custom IDs.
+            </param>
+            <param name="Params">
+            An array of integers. The provided array must be a contiguous
+            block of memory and it must not exceed the size that was mentioned
+            when registering the vector parameter.
+            </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.LogFloatParam(System.Int32,System.Single)">
+            <summary>
+            Logs the provided value for the specified event as the next parameter.
+            </summary>
+            <param name="EventID">
+            ID of the related event. This event ID must match with
+            either one of the predefined or one of the custom IDs.
+            </param>
+            <param name="Param">
+            The value to be logged.
+            </param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.ICerberusV2.LogFloatVectorParam(System.Int32,System.Single[])">
+            <summary>
+            Logs the provided value for the specified event as the next parameter.
+            </summary>
+            <param name="EventID">
+            ID of the related event. This event ID must match with
+            either one of the predefined or one of the custom IDs.
+            </param>
+            <param name="Params">
+            An array of floats. The provided array must be a contiguous
+            block of memory and it must not exceed the size that was mentioned
+            when registering the vector parameter.
+            </param>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.Cerberus.PlayerDespawn">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Hydra.Cerberus.PlayerDespawn"/> logs a player despawn, e.g. dying or switching to spectators.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerDespawn.Client">
+            <summary>
+            The player.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamage">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamage"/> logs when a player takes damage.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamage.VictimClient">
+            <summary>
+            GUID of the player taking damage.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamage.VictimPosition">
+            <summary>
+            The victim's current position in the world.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamage.VictimViewAngles">
+            <summary>
+            The direction in which the victim is looking at.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamage.AttackerClient">
+            <summary>
+            GUID of the player inflicting damage.
+            This parameter is set null for environmental/NPC/non-player damage.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamage.AttackerPosition">
+            <summary>
+            The attacker's current position in the world.
+            Unused if AttackerPlayerGUID is null.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamage.AttackerViewAngles">
+            <summary>
+            The direction in which the attacker is looking at.
+            Unused if AttackerPlayerGUID is null.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamage.WeaponID">
+            <summary>
+            Identifier of the weapon used, can be 0 if there is no weapon.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamage.HitBoneID">
+            <summary>
+            Identifier of the bone in victim's model to which the hit was made.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamage.Flags">
+            <summary>
+            Combination of flags from the PlayerTakeDamageFlags enumeration.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamageFlags">
+            Special flags for damage events
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamageFlags.PlayerTakeDamageFlagNone">
+            No special flags.
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamageFlags.PlayerTakeDamageFlagHeadshot">
+            The hit was a headshot.
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTick">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTick"/> logs the state of a player.
+            Called whenever a player's position is refreshed by the game server. (Server Tick)
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTick.Client">
+            <summary>
+            The player's GUID.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTick.PlayerPosition">
+            <summary>
+            The player's current position in the world.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTick.PlayerViewAngles">
+            <summary>
+            The direction in which the player is looking at.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTick.Flags">
+            <summary>
+            Combination of flags from the PlayerTickFlags enumeration.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTickFlags">
+            Special player states
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTickFlags.PlayerTickFlagNone">
+            No special flags.
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTickFlags.PlayerTickFlagAirborne">
+            The player is in the air, not touching ground or a ladder.
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTracker.#ctor(System.IntPtr)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTracker"/> class.
+            </summary>
+            <param name="CerberusInstance">A pointer to the appropriate Cerberus instance.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTracker.LogPlayerDespawn(EasyAntiCheat.Server.Hydra.Cerberus.PlayerDespawn)">
+            <summary>
+            Logs a player despawn, e.g. dying or switching to spectators.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTracker.LogPlayerTakeDamage(EasyAntiCheat.Server.Hydra.Cerberus.PlayerTakeDamage)">
+            <summary>
+            Logs when a player takes damage.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTracker.LogPlayerUseWeapon(EasyAntiCheat.Server.Hydra.Cerberus.PlayerUseWeapon)">
+            <summary>
+            Logs when a player uses a weapon.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTracker.LogPlayerTick(EasyAntiCheat.Server.Hydra.Cerberus.PlayerTick)">
+            <summary>
+            Logs the state of a player.
+            Called whenever a player's position is refreshed by the game server. (Server Tick)
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.PlayerTracker.LogGameRoundStart(System.String)">
+            <summary>
+            Logs a new game round start.
+            If the game doesn't have rounds per se, this routine is called when a new map has been loaded.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.Cerberus.PlayerUseWeapon">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Hydra.Cerberus.PlayerUseWeapon"/> logs when a player uses a weapon.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerUseWeapon.Client">
+            <summary>
+            The player's GUID.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerUseWeapon.PlayerPosition">
+            <summary>
+            The player's current position in the world.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerUseWeapon.PlayerViewAngles">
+            <summary>
+            The direction in which the player is looking at.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.PlayerUseWeapon.WeaponID">
+            <summary>
+            Identifier of the weapon used.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.Cerberus.Vector3">
+            <summary>
+            the <see cref="T:EasyAntiCheat.Server.Hydra.Cerberus.Vector3"/> struct represents a 3-dimensional vector.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.Vector3.X">
+            <summary>
+            The X dimension.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.Vector3.Y">
+            <summary>
+            The Y dimension.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.Cerberus.Vector3.Z">
+            <summary>
+            The Z dimension.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Cerberus.Vector3.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.Hydra.Cerberus.Vector3"/> struct.
+            </summary>
+            <param name="x">The X dimension.</param>
+            <param name="y">The Y dimension.</param>
+            <param name="z">The Z dimension.</param>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.NativeCerberus.DllFileName">
+            <summary>
+            Library name for Unity builds, any CPU. Windows/Linux/OSX.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.NativeCerberusV2.DllFileName">
+            <summary>
+            Library name for Unity builds, any CPU. Windows/Linux/OSX.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.NetProtect.INetProtect`1">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Hydra.NetProtect.INetProtect`1"/> interface provides methods for encrypting the game's own network traffic.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.NetProtect.INetProtect`1.ProtectMessage(`0,System.IO.MemoryStream,System.IO.MemoryStream)">
+            <summary>
+            Encrypts an arbitrary message that will be sent to the game client and deciphered on the other side.
+            Input and Output can be the same to encrypt in place.
+            
+            In this overload, all of Input from [0,Input.Length] will be used. The output will be written to
+            Output starting at position 0 and its Length will be updated appropriately.
+            
+            </summary>
+            <param name="ClientObject">The client that this message was received from.</param>
+            <param name="Input">
+            A MemoryStream containing the data to encrypt.
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <param name="Output">
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <returns>True on success, otherwise false.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.NetProtect.INetProtect`1.ProtectMessage(`0,System.IO.MemoryStream,System.Int64,System.IO.MemoryStream,System.Int64)">
+            <summary>
+            Encrypts an arbitrary message that will be sent to the game client and deciphered on the other side.
+            Input and Output can be the same to encrypt in place.
+            
+            In this overload, Input from [InputOffset,Input.Length] will be used. The output will be written to
+            Output starting at OutputOffset and its Length will be updated appropriately.
+            
+            NOTE: If Input and Output refer to the same object, then InputOffset and OutputOffset must be the same!
+            	  The underlying crypto APIs process one byte at a time and do not make a copy of the input data.
+            
+            </summary>
+            <param name="ClientObject">The client that this message will be sent to.</param>
+            <param name="Input">
+            A MemoryStream containing the data to encrypt.
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <param name="InputOffset">The position in Source to begin reading from.</param>
+            <param name="Output">
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <param name="OutputOffset">The position in Destination to begin writing to.</param>
+            <returns>True on success, otherwise false.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.NetProtect.INetProtect`1.UnprotectMessage(`0,System.IO.MemoryStream,System.IO.MemoryStream)">
+            <summary>
+            Decrypts an encrypted message received from a game client.
+            Source and Destination can be the same to decrypt in place.
+            </summary>
+            <param name="ClientObject">The client that this message was received from.</param>
+            <param name="Source">
+            A MemoryStream containing the data to encrypt.
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <param name="Destination">
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <returns>True on success, otherwise false.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.NetProtect.INetProtect`1.UnprotectMessage(`0,System.IO.MemoryStream,System.Int64,System.IO.MemoryStream,System.Int64)">
+            <summary>
+            Decrypts an arbitrary message that will be sent to the game client and deciphered on the other side.
+            Input and Output can be the same to encrypt in place.
+            
+            In this overload, Input from [InputOffset,Input.Length] will be used. The output will be written to
+            Output starting at OutputOffset and its Length will be updated appropriately.
+            
+            NOTE: If Input and Output refer to the same object, then InputOffset and OutputOffset must be the same!
+            	  The underlying crypto APIs process one byte at a time and do not make a copy of the input data.
+            
+            </summary>
+            <param name="ClientObject">The client that this message was received from.</param>
+            <param name="Input">
+            A MemoryStream containing the data to decrypt.
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <param name="InputOffset">The position in Source to begin reading from.</param>
+            <param name="Output">
+            This MemoryStream must have a publicly visible buffer and should be resizable.
+            See https://msdn.microsoft.com/en-us/library/system.io.memorystream.getbuffer(v=vs.110).aspx
+            </param>
+            <param name="OutputOffset">The position in Destination to begin writing to.</param>
+            <returns>True on success, otherwise false.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.NetProtect.NetProtect`1.#ctor(System.IntPtr,EasyAntiCheat.Server.Hydra.EasyAntiCheatServer{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="N:EasyAntiCheat.Server.Hydra.NetProtect"/> class.
+            </summary>
+            <param name="NetProtectInstance">A pointer to the appropriate NetProtect instance.</param>
+            <param name="EACServerInstance">A pointer to the appropriate EasyAntiCheatServer instance.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.NetProtect.NetProtect`1.ProtectMessage(`0,System.IO.MemoryStream,System.IO.MemoryStream)">
+            <summary>
+            Encrypts an arbitrary message that will be sent to the game client and deciphered on the other side.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.NetProtect.NetProtect`1.ProtectMessage(`0,System.IO.MemoryStream,System.Int64,System.IO.MemoryStream,System.Int64)">
+            <summary>
+            Encrypts an arbitrary message that will be sent to the game client and deciphered on the other side.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.NetProtect.NetProtect`1.UnprotectMessage(`0,System.IO.MemoryStream,System.IO.MemoryStream)">
+            <summary>
+            Decrypts an arbitrary message that was previously encrypted by a game client.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.NetProtect.NetProtect`1.UnprotectMessage(`0,System.IO.MemoryStream,System.Int64,System.IO.MemoryStream,System.Int64)">
+            <summary>
+            Decrypts an arbitrary message that was previously encrypted by a game client.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.NativeNetProtect.DllFileName">
+            <summary>
+            Library name for Unity builds, any CPU. Windows/Linux/OSX.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.Client">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Hydra.Client"/> class represents a game client that is currently being processed by the server.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Client.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.Hydra.Client"/> class.
+            </summary>
+            <param name="clientID">The ClientID of the game client, returned by EAC's RegisterClient interface.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Client.Equals(EasyAntiCheat.Server.Hydra.Client)">
+            <summary>
+            Implementation of the IEquatable interface.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.Client.GetHashCode">
+            <summary>
+            Recommended to go along with implementation of the IEquatable interface.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Hydra.Client.ClientID">
+            <summary>
+            The ClientID of the connected game client, returned by EAC's RegisterClient interface.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.ClientStatusUpdate`1">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Hydra.ClientStatusUpdate`1"/> class defines a pending game client kick.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.ClientStatusUpdate`1.timeBanExpires">
+            <summary>
+            Gets the time the ban expires, if the user is banlisted.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Hydra.ClientStatusUpdate`1.ClientObject">
+            <summary>
+            Gets the client.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Hydra.ClientStatusUpdate`1.Message">
+            <summary>
+            Gets the message describing the status update, if any.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Hydra.ClientStatusUpdate`1.RequiresKick">
+            <summary>
+            Gets a value indicating whether the client should be kicked.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Hydra.ClientStatusUpdate`1.Status">
+            <summary>
+            Gets the status of the client.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.ClientStatusUpdate`1.IsBanned(System.Nullable{System.DateTime}@)">
+            <summary>
+            Gets a value indicating whether the client is banned.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.ClientStatusUpdate`1.ToString">
+            <summary>
+            Returns a string representation of the object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1"/> class maintains an active connection to the EasyAntiCheat network.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.ClientStatusHandler">
+            <summary>
+            A delegate to the method that handles updates in the status of a connected game client.
+            </summary>
+            <param name="clientStatus">The instance describing the status of the client.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.#ctor(EasyAntiCheat.Server.Hydra.EasyAntiCheatServer{`0}.ClientStatusHandler,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1"/> class.
+            </summary>
+            <param name="clientStatusHandler">A delegate that will be called when a client's status changes.</param>
+            <param name="serverName">The human readable name of the game server.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.#ctor(EasyAntiCheat.Server.Hydra.EasyAntiCheatServer{`0}.ClientStatusHandler,System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1"/> class.
+            </summary>
+            <param name="clientStatusHandler">A delegate that will be called when a client's status changes.</param>
+            <param name="registerTimeout">Time in seconds to allow registered clients to complete the anti-cheat authentication.</param>
+            <param name="serverName">The human readable name of the game server.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.#ctor(EasyAntiCheat.Server.Hydra.EasyAntiCheatServer{`0}.ClientStatusHandler,EasyAntiCheat.Server.ServerConfiguration,System.Nullable{System.Int32})">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1"/> class.
+            </summary>
+            <param name="clientStatusHandler">A delegate that will be called when a client's status changes.</param>
+            <param name="serverConfiguration">The configuration to consider.</param>
+            <param name="gameID">The GameID to intialize for. Should only be set for testing purposes.</param>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.NetProtect">
+            <summary>
+            Gets the NetProtect game message protection instance.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.Dispose">
+            <summary>
+            Closes the connection to EasyAntiCheat network.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.HandleClientUpdates">
+            <summary>
+            Marks all pending client status updates as handled.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.RegisterClient(`0,System.String,System.String)">
+            <summary>
+            Registers a connected game client to EasyAntiCheat network.
+            </summary>
+            <param name="clientObject">Any object that uniquely identifies the user.</param>
+            <param name="playerGuid">The GUID of the user.</param>
+            <param name="playerIP">The IP address of the user.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.RegisterClient(`0,System.String,System.String,System.String)">
+            <summary>
+            Registers a connected game client to EasyAntiCheat network.
+            </summary>
+            <param name="clientObject">Any object that uniquely identifies the user.</param>
+            <param name="playerGuid">The GUID of the user.</param>
+            <param name="playerIP">The IP address of the user.</param>
+            <param name="ownerGuid">The GUID of the game owner.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.RegisterClient(`0,System.String,System.String,System.String,System.String,EasyAntiCheat.Server.PlayerRegisterFlags)">
+            <summary>
+            Registers a connected game client to EasyAntiCheat network.
+            </summary>
+            <param name="clientObject">Any object that uniquely identifies the user.</param>
+            <param name="playerGuid">The GUID of the user.</param>
+            <param name="playerIP">The IP address of the user.</param>
+            <param name="ownerGuid">The GUID of the game owner.</param>
+            <param name="playerName">The ingame name of the user.</param>
+            <param name="flags">Combination of flags from the PlayerRegisterFlags enumeration.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.GenerateCompatibilityClient">
+            <summary>
+            Helper function that generates a client object for compatibility with old code.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.UnregisterClient(`0)">
+            <summary>
+            Unregisters a game client from the EasyAntiCheat network.
+            </summary>
+            <param name="clientObject">ClientObject that was previously registered with RegisterClient.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.PopNetworkMessage(`0@,System.Byte[]@,System.Int32@)">
+            <summary>
+            Polls the EasyAntiCheat server plugin for any messages that should be sent to any client.
+            </summary>
+            <param name="clientObject">Returns the client to whom this message should be sent.</param>
+            <param name="messageBuffer">A byte array containing the EAC message to be sent to the client.</param>
+            <param name="messageLength">The length of the EAC message to be sent to the client.</param>
+            <returns>False if there are no messages to send.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.PopNetworkMessage(`0,System.Byte[]@,System.Int32@)">
+            <summary>
+            Polls the EasyAntiCheat server plugin for any messages that should be sent to a specific client.
+            </summary>
+            <param name="desiredClient">One client for whom messages should be popped.</param>
+            <param name="messageBuffer">A byte array containing the EAC message to be sent to the client.</param>
+            <param name="messageLength">The length of the EAC message to be sent to the client.</param>
+            <returns>False if there are no messages to send to this client.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.SetMaxAllowedMessageLength(`0,System.Int32)">
+            <summary>
+            Sets up the maximum size of EAC network messages.
+            If it is not set then a standard value of 256 will be used. Must not be zero.
+            </summary>
+            <param name="clientObject">The client whose maximum length should be changed.</param>
+            <param name="maxMessageLength">Maximum message length that the routine is allowed to return for the caller.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.PushNetworkMessage(`0,System.Byte[],System.Int32)">
+            <summary>
+            Pushes a network message received from the EAC game client.
+            </summary>
+            <param name="clientObject">The client who sent this message.</param>
+            <param name="messageBuffer">A byte array containing the EAC message received from the client.</param>
+            <param name="messageLength">The length of the EAC message received from the client.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.SetClientNetworkState(`0,System.Boolean)">
+             <summary>
+             Specific games only.
+            
+             Hints the EAC server-side about the current state of the network communication capabilities
+             between the game server and the specific game client.
+            
+             For instance, if the server knows that the game client is loading a map or receiving server snapshot
+             that may take several minutes to complete, this API should be used before and afterwards for the client.
+            
+             By default the Active flag is always set for all registered clients.
+             </summary>
+             <param name="clientObject">The client whose state should be updated.</param>
+             <param name="networkActive">Flag indicating whether the game client is in a responsive state.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1.SetServer(EasyAntiCheat.Server.ServerType)">
+            <summary>
+            Sets the EAC backend server type.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.NativeModule.DllFileName">
+            <summary>
+            Library name for Unity builds, any CPU. Windows/Linux/OSX.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Hydra.NativeModule.onLogEvent">
+            <summary>
+            Static log event handler for server plugin events.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Legacy.Cerberus.GameRoundStart">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Legacy.Cerberus.GameRoundStart"/> logs a new game round start.
+            If the game doesn't have rounds per se, this routine is called when a new map has been loaded.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.GameRoundStart.MapName">
+            <summary>
+            The name of the loaded game map.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Legacy.Cerberus.ICerberus">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Legacy.Cerberus.ICerberus"/> interface provides methods for tracking players.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Cerberus.ICerberus.LogPlayerDespawn(System.String)">
+            <summary>
+            Logs a player despawn, e.g. dying or switching to spectators.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Cerberus.ICerberus.LogPlayerTakeDamage(EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamage)">
+            <summary>
+            Logs when a player takes damage.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Cerberus.ICerberus.LogPlayerUseWeapon(EasyAntiCheat.Server.Legacy.Cerberus.PlayerUseWeapon)">
+            <summary>
+            Logs when a player uses a weapon.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Cerberus.ICerberus.LogPlayerTick(EasyAntiCheat.Server.Legacy.Cerberus.PlayerTick)">
+            <summary>
+            Logs the state of a player.
+            Called whenever a player's position is refreshed by the game server. (Server Tick)
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Cerberus.ICerberus.LogGameRoundStart(System.String)">
+            <summary>
+            Logs a new game round start.
+            If the game doesn't have rounds per se, this routine is called when a new map has been loaded.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Legacy.Cerberus.PlayerDespawn">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Legacy.Cerberus.PlayerDespawn"/> logs a player despawn, e.g. dying or switching to spectators.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerDespawn.PlayerGUID">
+            <summary>
+            The player's GUID.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamage">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamage"/> logs when a player takes damage.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamage.VictimPlayerGUID">
+            <summary>
+            GUID of the player taking damage.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamage.VictimPlayerPosition">
+            <summary>
+            The victim's current position in the world.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamage.VictimPlayerViewAngles">
+            <summary>
+            The direction in which the victim is looking at.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamage.AttackerPlayerGUID">
+            <summary>
+            GUID of the player inflicting damage.
+            This parameter is set null for environmental/NPC/non-player damage.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamage.AttackerPlayerPosition">
+            <summary>
+            The attacker's current position in the world.
+            Unused if AttackerPlayerGUID is null.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamage.AttackerPlayerViewAngles">
+            <summary>
+            The direction in which the attacker is looking at.
+            Unused if AttackerPlayerGUID is null.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamage.WeaponID">
+            <summary>
+            Identifier of the weapon used, can be 0 if there is no weapon.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamage.HitBoneID">
+            <summary>
+            Identifier of the bone in victim's model to which the hit was made.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamage.Flags">
+            <summary>
+            Combination of flags from the PlayerTakeDamageFlags enumeration.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamageFlags">
+            Special flags for damage events
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamageFlags.PlayerTakeDamageFlagNone">
+            No special flags.
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamageFlags.PlayerTakeDamageFlagHeadshot">
+            The hit was a headshot.
+        </member>
+        <member name="T:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTick">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTick"/> logs the state of a player.
+            Called whenever a player's position is refreshed by the game server. (Server Tick)
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTick.PlayerGUID">
+            <summary>
+            The player's GUID.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTick.PlayerPosition">
+            <summary>
+            The player's current position in the world.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTick.PlayerViewAngles">
+            <summary>
+            The direction in which the player is looking at.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTick.Flags">
+            <summary>
+            Combination of flags from the PlayerTickFlags enumeration.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTickFlags">
+            Special player states
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTickFlags.PlayerTickFlagNone">
+            No special flags.
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTickFlags.PlayerTickFlagAirborne">
+            The player is in the air, not touching ground or a ladder.
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTracker.#ctor(System.IntPtr)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTracker"/> class.
+            </summary>
+            <param name="CerberusInstance">A pointer to the appropriate Cerberus instance.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTracker.LogPlayerDespawn(System.String)">
+            <summary>
+            Logs a player despawn, e.g. dying or switching to spectators.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTracker.LogPlayerTakeDamage(EasyAntiCheat.Server.Legacy.Cerberus.PlayerTakeDamage)">
+            <summary>
+            Logs when a player takes damage.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTracker.LogPlayerUseWeapon(EasyAntiCheat.Server.Legacy.Cerberus.PlayerUseWeapon)">
+            <summary>
+            Logs when a player uses a weapon.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTracker.LogPlayerTick(EasyAntiCheat.Server.Legacy.Cerberus.PlayerTick)">
+            <summary>
+            Logs the state of a player.
+            Called whenever a player's position is refreshed by the game server. (Server Tick)
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Cerberus.PlayerTracker.LogGameRoundStart(System.String)">
+            <summary>
+            Logs a new game round start.
+            If the game doesn't have rounds per se, this routine is called when a new map has been loaded.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Legacy.Cerberus.PlayerUseWeapon">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Legacy.Cerberus.PlayerUseWeapon"/> logs when a player uses a weapon.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerUseWeapon.PlayerGUID">
+            <summary>
+            The player's GUID.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerUseWeapon.PlayerPosition">
+            <summary>
+            The player's current position in the world.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerUseWeapon.PlayerViewAngles">
+            <summary>
+            The direction in which the player is looking at.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.PlayerUseWeapon.WeaponID">
+            <summary>
+            Identifier of the weapon used.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Legacy.Cerberus.Vector3">
+            <summary>
+            the <see cref="T:EasyAntiCheat.Server.Legacy.Cerberus.Vector3"/> struct represents a 3-dimensional vector.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.Vector3.X">
+            <summary>
+            The X dimension.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.Vector3.Y">
+            <summary>
+            The Y dimension.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.Cerberus.Vector3.Z">
+            <summary>
+            The Z dimension.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Cerberus.Vector3.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.Legacy.Cerberus.Vector3"/> struct.
+            </summary>
+            <param name="x">The X dimension.</param>
+            <param name="y">The Y dimension.</param>
+            <param name="z">The Z dimension.</param>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.NativeCerberus.DllFileName">
+            <summary>
+            Library name for Unity builds, any CPU. Windows/Linux/OSX.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Legacy.Client">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Legacy.Client"/> class represents a game client that is currently being processed by the server.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Client.#ctor(System.Byte[],System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.Legacy.Client"/> class.
+            </summary>
+            <param name="playerGuid">The GUID of the game account.</param>
+            <param name="ownerGuid">The GUID of the game owner.</param>
+            <param name="token">The token of the game session.</param>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Legacy.Client.OwnerGuid">
+            <summary>
+            The identifier of the game's owner.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Legacy.Client.PlayerGuid">
+            <summary>
+            The identifier of the game account.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Legacy.Client.Token">
+            <summary>
+            The token identifier of the game client session.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Legacy.ClientStatusUpdate">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Legacy.ClientStatusUpdate"/> class defines a pending game client kick.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.ClientStatusUpdate.timeBanExpires">
+            <summary>
+            Gets the time the ban expires, if the game account is banlisted.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Legacy.ClientStatusUpdate.Client">
+            <summary>
+            Gets the kicked game client.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Legacy.ClientStatusUpdate.Message">
+            <summary>
+            Gets the message describing the status update, if any.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Legacy.ClientStatusUpdate.RequiresKick">
+            <summary>
+            Gets a value indicating whether the game client should be kicked.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Legacy.ClientStatusUpdate.Status">
+            <summary>
+            Gets the status of the client.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.ClientStatusUpdate.IsBanned(System.Nullable{System.DateTime}@)">
+            <summary>
+            Gets a value indicating whether the game account is banned.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.ClientStatusUpdate.ToString">
+            <summary>
+            Returns a string representation of the object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Legacy.ClientStatusHandler">
+            <summary>
+            A delegate to the method that handles updates in the status of a game client.
+            </summary>
+            <param name="userStatus">The instance describing the status of the game client.</param>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Legacy.EasyAntiCheatServer">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Legacy.EasyAntiCheatServer"/> class maintains an active connection to the EasyAntiCheat network.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.EasyAntiCheatServer.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.Legacy.EasyAntiCheatServer"/> class.
+            </summary>
+            <param name="serverName">The human readable name of the game server.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.EasyAntiCheatServer.#ctor(EasyAntiCheat.Server.ServerConfiguration,System.Nullable{System.Int32})">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.Legacy.EasyAntiCheatServer"/> class.
+            </summary>
+            <param name="serverConfiguration">The configuration to consider.</param>
+            <param name="gameID">The GameID to intialize for. Should only be set for testing purposes.</param>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Legacy.EasyAntiCheatServer.Scout">
+            <summary>
+            Gets the Scout interface instance.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Legacy.EasyAntiCheatServer.ClientAuth">
+            <summary>
+            Gets the ClientAuth interface instance.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.EasyAntiCheatServer.Dispose">
+            <summary>
+            Closes the connection to EasyAntiCheat network.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.EasyAntiCheatServer.HandleUserUpdates(EasyAntiCheat.Server.Legacy.ClientStatusHandler)">
+            <summary>
+            Marks all pending client status updates as handled.
+            </summary>
+            <param name="handleStatus">The method that actually handles a status update.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.EasyAntiCheatServer.RegisterUser(System.Byte[],System.String)">
+            <summary>
+            Registers user to EasyAntiCheat network.
+            </summary>
+            <param name="token">Unique token for the user, the same as passed to the EAC client with the SetUserToken() function.</param>
+            <param name="playerGuid">The GUID of the user.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.EasyAntiCheatServer.RegisterUser(System.Byte[],System.String,System.String)">
+            <summary>
+            Registers user to EasyAntiCheat network.
+            </summary>
+            <param name="token">Unique token for the user, the same as passed to the EAC client with the SetUserToken() function.</param>
+            <param name="playerGuid">The GUID of the user.</param>
+            <param name="ownerGuid">The GUID of the game owner.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.EasyAntiCheatServer.RegisterUser(System.Byte[],System.String,System.String,System.String,EasyAntiCheat.Server.PlayerRegisterFlags)">
+            <summary>
+            Registers user to EasyAntiCheat network.
+            </summary>
+            <param name="token">Unique token for the user, the same as passed to the EAC client with the SetUserToken() function.</param>
+            <param name="playerGuid">The GUID of the user.</param>
+            <param name="ownerGuid">The GUID of the game owner.</param>
+            <param name="playerName">The ingame name of the user.</param>
+            <param name="flags">Combination of flags from the PlayerRegisterFlags enumeration.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.EasyAntiCheatServer.UnregisterUser(System.Byte[])">
+            <summary>
+            Unregisters user from the EasyAntiCheat network.
+            </summary>
+            <param name="token">Authentication token of the game client.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.EasyAntiCheatServer.SetServer(EasyAntiCheat.Server.ServerType)">
+            <summary>
+            Sets the EAC backend server type.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.NativeModule.DllFileName">
+            <summary>
+            Library name for Unity builds, any CPU. Windows/Linux/OSX.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Legacy.NativeModule.onLogEvent">
+            <summary>
+            Static log event handler for server plugin events.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Legacy.Protocol.UserToken">
+            <summary>
+            User token container.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Protocol.UserToken.Generate">
+            <summary>
+            Generates a random user token.
+            </summary>
+            <returns>A new user token.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Protocol.UserToken.op_Implicit(EasyAntiCheat.Server.Legacy.Protocol.UserToken)~System.Byte[]">
+            <summary>
+            Implicit cast to byte[].
+            </summary>
+            <param name="token">The <see cref="T:EasyAntiCheat.Server.Legacy.Protocol.UserToken"/></param>
+            <returns>A byte[] instance.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Protocol.UserToken.op_Implicit(System.Byte[])~EasyAntiCheat.Server.Legacy.Protocol.UserToken">
+            <summary>
+            Implicit cast to <see cref="T:EasyAntiCheat.Server.Legacy.Protocol.UserToken"/>.
+            </summary>
+            <param name="token">The byte[] token.</param>
+            <returns>A <see cref="T:EasyAntiCheat.Server.Legacy.Protocol.UserToken"/> value.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Protocol.UserToken.GetHashCode">
+            <summary>
+            Gets the hash code of the internal user token.
+            </summary>
+            <returns>The hashcode value.</returns>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Legacy.Protocol.UserToken.ToString">
+            <summary>
+            Gets the MD5 string representation of the user token.
+            </summary>
+            <returns>The MD5 string.</returns>
+        </member>
+        <member name="T:EasyAntiCheat.Server.ClientAuth.ClientAuth">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.ClientAuth.ClientAuth"/> class loads the EasyAntiCheat ClientAuth service.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.ClientAuth.ClientAuth.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.ClientAuth.ClientAuth"/> class.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.ClientAuth.ClientAuth.Dispose">
+            <summary>
+            Disposes the ClientAuth instance.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.ClientAuth.ClientAuth.GenerateChallenge(System.Byte[])">
+            <summary>
+            Generates a challenge that can be used to verify that the client is running EAC.
+            
+            The generated challenge is returned in the ChallengeBuffer. It must be stored for the user for the matching call 
+            to VerifyChallenge.
+            </summary>
+            <param name="ChallengeBuffer">Buffer for storing the generated challenge. Size must be 128 bytes.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.ClientAuth.ClientAuth.VerifyChallenge(System.Byte[],System.Byte[])">
+            <summary>
+            Verifies that the client's response to the challenge is valid.
+            
+            </summary>
+            <param name="ServerChallenge">Buffer that contains a challenge generated by the server.</param>
+            <param name="ClientResponse">Buffer that contains the client's response to the challenge.</param>
+        </member>
+        <member name="F:EasyAntiCheat.Server.ClientAuth.NativeClientAuth.DllFileName">
+            <summary>
+            Library name for Unity builds, any CPU. Windows/Linux/OSX.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.LogLevel">
+            <summary>
+            Log verbosity level.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.LogLevel.Error">
+            <summary>
+            Code bugs.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.LogLevel.Warning">
+            <summary>
+            Connection status changes.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.LogLevel.Info">
+            <summary>
+            Informational messages about user status changes.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.LogLevel.Debug">
+            <summary>
+            Debugging information.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.LogWriterDelegate">
+            <summary>
+            LogWriterDelegate.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.LogMessageWriterDelegate">
+            <summary>
+            LogMessageWriterDelegate.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Log">
+            <summary>
+            The static <see cref="T:EasyAntiCheat.Server.Log"/> class provides the logging functionality of the EasyAntiCheat server plugin.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Log.doWrite">
+            <summary>
+            The method to write log messages with.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Log.Level">
+            <summary>
+            Gets or sets the lowest level to log.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Log.Prefix">
+            <summary>
+            Gets or sets the prefix of each log message.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.Log.TimestampFormat">
+            <summary>
+            Gets or sets the format string for the timestamp. Can be null or empty to disable the timestamp.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Log.SetOut(System.IO.TextWriter)">
+            <summary>
+            Sets the output stream for log messages.
+            </summary>
+            <param name="writer">The instance to output the log messages with; can be null.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Log.SetOut(EasyAntiCheat.Server.LogMessageWriterDelegate)">
+            <summary>
+            Sets a writer delegate for log messages.
+            </summary>
+            <param name="doWrite">A delegate to the method to write messages with; can be null.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Log.SetOut(EasyAntiCheat.Server.LogWriterDelegate)">
+            <summary>
+            Sets a writer delegate for log messages.
+            </summary>
+            <param name="doWrite">A delegate to the method to write messages with; can be null.</param>
+        </member>
+        <member name="T:EasyAntiCheat.Server.PlayerRegisterFlags">
+            Flags to specify details about this particular player
+        </member>
+        <member name="F:EasyAntiCheat.Server.PlayerRegisterFlags.PlayerRegisterFlagNone">
+            The player needs no flags
+        </member>
+        <member name="F:EasyAntiCheat.Server.PlayerRegisterFlags.PlayerRegisterFlagAdmin">
+            The player has admin privileges on the game server.
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.NativeScout.DllFileName">
+            <summary>
+            Library name for Unity builds, any CPU. Windows/Linux/OSX.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Scout.PlayerReportCategory">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Scout.PlayerReportCategory"/> enum describes the different reasons for which a player can be reported.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.PlayerReportCategory.PlayerReportCheating">
+            <summary>
+            Cheating.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.PlayerReportCategory.PlayerReportExploiting">
+            <summary>
+            Exploiting.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.PlayerReportCategory.PlayerReportProfile">
+            <summary>
+            Profile.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.PlayerReportCategory.PlayerReportVerbalAbuse">
+            <summary>
+            Verbal abuse.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.PlayerReportCategory.PlayerReportScamming">
+            <summary>
+            Scamming.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.PlayerReportCategory.PlayerReportSpamming">
+            <summary>
+            Spamming.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.PlayerReportCategory.PlayerReportOther">
+            <summary>
+            Other negative behavior.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Scout.InvalidPlayerStateReportCategory">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Scout.InvalidPlayerStateReportCategory"/> enum describes the different reasons for which the server can report the player.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.InvalidPlayerStateReportCategory.PlayerReportCheating">
+            <summary>
+            Cheating.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.InvalidPlayerStateReportCategory.PlayerReportExploiting">
+            <summary>
+            Exploiting.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.InvalidPlayerStateReportCategory.PlayerReportProfile">
+            <summary>
+            Profile.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.InvalidPlayerStateReportCategory.PlayerReportVerbalAbuse">
+            <summary>
+            Verbal abuse.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.InvalidPlayerStateReportCategory.PlayerReportScamming">
+            <summary>
+            Scamming.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.InvalidPlayerStateReportCategory.PlayerReportSpamming">
+            <summary>
+            Spamming.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.InvalidPlayerStateReportCategory.PlayerReportOther">
+            <summary>
+            Other negative behavior.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Scout.KickReasonCategory">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Scout.KickReasonCategory"/> enum describes the different reasons for which a player can be kicked.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.KickReasonCategory.KickReasonInvalid">
+            <summary>
+            Invalid report category..
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.KickReasonCategory.KickReasonCheating">
+            <summary>
+            Cheating.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.KickReasonCategory.KickReasonAdmin">
+            <summary>
+            Kicked by admin.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.KickReasonCategory.KickReasonEAC">
+            <summary>
+            Kicked by EAC.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.Scout.KickReasonCategory.KickReasonOther">
+            <summary>
+            Other kicking reason.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.Scout.Scout">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.Scout.Scout"/> class loads the EasyAntiCheat Scout service.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Scout.Scout.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.Scout.Scout"/> class.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Scout.Scout.Dispose">
+            <summary>
+            Disposes the Scout instance.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Scout.Scout.SendPlayerReport(System.String,System.String,EasyAntiCheat.Server.Scout.PlayerReportCategory,System.String)">
+            <summary>
+            Logs a player reporting another player, e.g. for griefing, abusive chat, other reason.
+            
+            The report is sent asynchronously in a background thread.
+            This routine is thread-safe, can be called from any thread,
+            and is guaranteed to return immediately to the caller.
+            </summary>
+            <param name="ReportedPlayerGUID">GUID of the player that is being reported.</param>
+            <param name="ReportingPlayerGUID">GUID of the player making the report.</param>
+            <param name="ReportCategory">The report category identifier.</param>
+            <param name="ReportDescription">Report description provided by the reporting player.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Scout.Scout.SendKickReport(System.String,System.String,EasyAntiCheat.Server.Scout.KickReasonCategory)">
+            <summary>
+            Logs a player being kicked from the server, e.g. for griefing, abusive chat, other reason.
+            
+            The report is sent asynchronously in a background thread.
+            This routine is thread-safe, can be called from any thread,
+            and is guaranteed to return immediately to the caller.
+            </summary>
+            <param name="KickPlayerGUID">GUID of the player that is being kicked.</param>
+            <param name="KickDescription">Description provided for the kick.</param>
+            <param name="KickCategoryID">The kick reason category identifier.</param>
+        </member>
+        <member name="M:EasyAntiCheat.Server.Scout.Scout.SendInvalidPlayerStateReport(System.String,EasyAntiCheat.Server.Scout.InvalidPlayerStateReportCategory,System.String)">
+            <summary>
+            Logs an invalid player state reported by the game server.
+            
+            The report is sent asynchronously in a background thread.
+            This routine is thread-safe, can be called from any thread,
+            and is guaranteed to return immediately to the caller.
+            </summary>
+            <param name="PlayerGUID">GUID of the player that is being reported.</param>
+            <param name="ReportCategory">Invalid player state category identifier.</param>
+            <param name="Report">String representation of the invalid player state report.</param>
+        </member>
+        <member name="T:EasyAntiCheat.Server.ServerConfiguration">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.ServerConfiguration"/> struct specifies the configuration properties for an <see cref="T:EasyAntiCheat.Server.Hydra.EasyAntiCheatServer`1"/> instance.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.ServerConfiguration.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.ServerConfiguration"/> class.
+            </summary>
+        </member>
+        <member name="M:EasyAntiCheat.Server.ServerConfiguration.#ctor(System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EasyAntiCheat.Server.ServerConfiguration"/> class.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.ServerConfiguration.Default">
+            <summary>
+            Gets the default server configuration.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.ServerConfiguration.RegisterTimeout">
+            <summary>
+            Gets or sets the client register timeout.
+            </summary>
+        </member>
+        <member name="P:EasyAntiCheat.Server.ServerConfiguration.ServerName">
+            <summary>
+            Gets or sets the game server name.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.ServerType">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.ServerType"/> enum defines a type of EasyAntiCheat server.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.ServerType.Release">
+            <summary>
+            The production network.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.ServerType.Debug">
+            <summary>
+            The test environment.
+            </summary>
+        </member>
+        <member name="T:EasyAntiCheat.Server.ClientStatus">
+            <summary>
+            The <see cref="T:EasyAntiCheat.Server.ClientStatus"/> enum describes the different reasons for which a user can be kicked.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.ClientStatus.ClientDisconnected">
+            <summary>
+            (Legacy only) The client is not running the anti-cheat.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.ClientStatus.ClientAuthenticationFailed">
+            <summary>
+            The client is not running the anti-cheat, or has failed the anti-cheat authentication.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.ClientStatus.ClientAuthenticatedLocal">
+            <summary>
+            The client has been authenticated locally by the EAC game server plugin.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.ClientStatus.ClientBanned">
+            <summary>
+            The client's game account has been banned.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.ClientStatus.ClientViolation">
+            <summary>
+            The client failed an anti-cheat runtime integrity check.
+            </summary>
+        </member>
+        <member name="F:EasyAntiCheat.Server.ClientStatus.ClientAuthenticatedRemote">
+            <summary>
+            The client has been authenticated and its account ban status
+            checked remotely from the EAC back-end.
+            </summary>
+        </member>
+    </members>
+</doc>
